@@ -3,119 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achievements - Calamba Expressive Properties</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="stylesheet" href="/static/css/modal.css">
+    <title>Our Investors - Calamba Expressive Properties</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <style>
+        /* Main layout styling to make footer stick to the bottom */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1; /* This will make the main content area expand to fill available space */
+        }
+
+        .navbar-custom {
+            background-color: #c8102e !important; /* Navbar background color */
+        }
+
+        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
+            color: #f3ef11 !important; /* Navbar text color */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #c8102e; /* Footer background color */
+            color: #f3ef11; /* Footer text color */
+            padding: 20px 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+    </style>
+    
 </head>
 <body>
     <header>
-        <h1>Calamba Expressive Properties Corporation</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about.html">About Us</a>
-            <a href="/services.html">Services</a>
-            <a href="/projects.html">Projects</a>
-            <a href="/team.html">Our Team</a>
-            <a href="/achievements.html">Achievements</a>
-            <a href="/partners.html">Partners</a>
-            <a href="/contact.html">Contact Us</a>
+        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../team.html">Our Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../achievements.html">Achievements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../partners.html">Partners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contact.html">Contact Us</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Excellence in Real Estate
+                </span>
+            </div>
         </nav>
     </header>
     <main>
-        <section>
-            <h1 style="text-align: center;">Our Investors
-            </h1>
-            <div class="grid-container">
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_156.jpeg" alt="image_156.jpeg" onclick="openModal('/static/images/partners/image_156.jpeg', '')">
+        
+<section>
+    <h1 style="text-align: center;">Our Investors</h1>
+    <div class="grid-container">
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_148.jpeg" alt="image_148.jpeg" onclick="openModal('/static/images/partners/image_148.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_169.jpeg" alt="image_169.jpeg" onclick="openModal('/static/images/partners/image_169.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_156.jpeg" alt="image_156.jpeg" onclick="openModal('/static/images/partners/image_156.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_153.jpeg" alt="image_153.jpeg" onclick="openModal('/static/images/partners/image_153.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_155.jpeg" alt="image_155.jpeg" onclick="openModal('/static/images/partners/image_155.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_172.jpeg" alt="image_172.jpeg" onclick="openModal('/static/images/partners/image_172.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_146.jpeg" alt="image_146.jpeg" onclick="openModal('/static/images/partners/image_146.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_170.jpeg" alt="image_170.jpeg" onclick="openModal('/static/images/partners/image_170.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_158.jpeg" alt="image_158.jpeg" onclick="openModal('/static/images/partners/image_158.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_171.jpeg" alt="image_171.jpeg" onclick="openModal('/static/images/partners/image_171.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_151.jpeg" alt="image_151.jpeg" onclick="openModal('/static/images/partners/image_151.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_150.jpeg" alt="image_150.jpeg" onclick="openModal('/static/images/partners/image_150.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_157.jpeg" alt="image_157.jpeg" onclick="openModal('/static/images/partners/image_157.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_168.jpeg" alt="image_168.jpeg" onclick="openModal('/static/images/partners/image_168.jpeg', '')">
+        </div>
+        
+        <div class="grid-item">
+            <img src="../static/images/partners/image_152.jpeg" alt="image_152.jpeg" onclick="openModal('/static/images/partners/image_152.jpeg', '')">
+        </div>
+        
+    </div>
+</section>
 
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_158.jpeg" alt="image_158.jpeg" onclick="openModal('/static/images/partners/image_158.jpeg', '')">
+<!-- Modal Structure -->
+<div id="myModal" class="modal" onclick="closeModalOnOutsideClick(event)">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <div id="caption"></div>
+</div>
 
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_146.jpeg" alt="image_146.jpeg" onclick="openModal('/static/images/partners/image_146.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_170.jpeg" alt="image_170.jpeg" onclick="openModal('/static/images/partners/image_170.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_151.jpeg" alt="image_151.jpeg" onclick="openModal('/static/images/partners/image_151.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_169.jpeg" alt="image_169.jpeg" onclick="openModal('/static/images/partners/image_169.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_168.jpeg" alt="image_168.jpeg" onclick="openModal('/static/images/partners/image_168.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_152.jpeg" alt="image_152.jpeg" onclick="openModal('/static/images/partners/image_152.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_153.jpeg" alt="image_153.jpeg" onclick="openModal('/static/images/partners/image_153.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_148.jpeg" alt="image_148.jpeg" onclick="openModal('/static/images/partners/image_148.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_155.jpeg" alt="image_155.jpeg" onclick="openModal('/static/images/partners/image_155.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_171.jpeg" alt="image_171.jpeg" onclick="openModal('/static/images/partners/image_171.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_157.jpeg" alt="image_157.jpeg" onclick="openModal('/static/images/partners/image_157.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_172.jpeg" alt="image_172.jpeg" onclick="openModal('/static/images/partners/image_172.jpeg', '')">
-
-                </div>
-                
-                <div class="grid-item">
-                    <img src="/static/images/partners/image_150.jpeg" alt="image_150.jpeg" onclick="openModal('/static/images/partners/image_150.jpeg', '')">
-
-                </div>
-                
-            </div>
-        </section>
     </main>
-    <footer>
+    <footer class="text-center">
         <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.</p>
     </footer>
 
-     <!-- Modal Structure -->
-    <div id="myModal" class="modal" onclick="closeModalOnOutsideClick(event)">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImg">
-        <div id="caption"></div>
-    </div>
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+<script src="../static/js/modal.js"></script>
 
-    <script src="/static/js/modal.js"></script>
 </body>
 </html>

@@ -4,141 +4,332 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Calamba Expressive Properties</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <style>
+        /* Main layout styling to make footer stick to the bottom */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1; /* This will make the main content area expand to fill available space */
+        }
+
+        .navbar-custom {
+            background-color: #c8102e !important; /* Navbar background color */
+        }
+
+        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
+            color: #f3ef11 !important; /* Navbar text color */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #c8102e; /* Footer background color */
+            color: #f3ef11; /* Footer text color */
+            padding: 20px 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+    </style>
     
+<style>
+    /* Grid container to align the projects in a grid */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+        grid-gap: 40px; /* Increased gap between items */
+        margin-top: 20px;
+    }
+
+    /* Style for each grid item */
+    .grid-item {
+        display: flex;
+        justify-content: center;
+        padding: 20px; /* Add padding to create more separation */
+    }
+
+    /* Card styling */
+    .card {
+        width: 100%; /* Ensure card takes up full width of the grid item */
+        border-radius: 8px;
+        background-color: #c8102e;
+        color: white;
+        border: 2px solid #f3ef11; /* Add a border to the card itself */
+    }
+
+    .card-body {
+        background-color: #c8102e;
+        color: white;
+    }
+
+    .btn-light {
+        background-color: #f3ef11;
+        color: #c8102e;
+    }
+
+    .btn-light:hover {
+        background-color: #c8102e;
+        color: white;
+    }
+
+    /* Card image */
+    .card-img-top {
+        max-height: 200px;
+        object-fit: cover; /* Ensures the image covers the card without distortion */
+    }
+</style>
+
 </head>
 <body>
     <header>
-        <h1>Calamba Expressive Properties Corporation</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about.html">About Us</a>
-            <a href="/services.html">Services</a>
-            <a href="/projects.html">Projects</a>
-            <a href="/team.html">Our Team</a>
-            <a href="/achievements.html">Achievements</a>
-            <a href="/partners.html">Partners</a>
-            <a href="">Contact Us</a>
+        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../team.html">Our Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../achievements.html">Achievements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../partners.html">Partners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contact.html">Contact Us</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Excellence in Real Estate
+                </span>
+            </div>
         </nav>
     </header>
     <main>
         
 <section>
     <h2>Our Projects</h2>
+
+    <!-- Grid container for projects -->
     <div class="grid-container">
         
         <div class="grid-item">
-            <a href="/project/5.html">
-                <img src="/static/images/projects/5/a.jpeg" alt="5">
-                <h3>5</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/9.html">
+                    <img class="card-img-top" src="../static/images/projects/9/zzz_description.txt" alt="9">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/9.html" class="btn btn-light">9</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/8.html">
-                <img src="/static/images/projects/8/image_106.jpeg" alt="8">
-                <h3>8</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/4.html">
+                    <img class="card-img-top" src="../static/images/projects/4/zzz_description.txt" alt="4">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/4.html" class="btn btn-light">4</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/1.html">
-                <img src="/static/images/projects/1/image_86.jpeg" alt="1">
-                <h3>1</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/5.html">
+                    <img class="card-img-top" src="../static/images/projects/5/zzz_description.txt.txt" alt="5">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/5.html" class="btn btn-light">5</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/14.html">
-                <img src="/static/images/projects/14/image_127.jpeg" alt="14">
-                <h3>14</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/2.html">
+                    <img class="card-img-top" src="../static/images/projects/2/zzz_description.txt" alt="2">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/2.html" class="btn btn-light">2</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/2.html">
-                <img src="/static/images/projects/2/image_90.jpeg" alt="2">
-                <h3>2</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/14.html">
+                    <img class="card-img-top" src="../static/images/projects/14/zzz_description.txt" alt="14">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/14.html" class="btn btn-light">14</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/12.html">
-                <img src="/static/images/projects/12/image_120.jpeg" alt="12">
-                <h3>12</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/1.html">
+                    <img class="card-img-top" src="../static/images/projects/1/image_81.jpeg" alt="1">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/1.html" class="btn btn-light">1</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/6.html">
-                <img src="/static/images/projects/6/image_102.jpeg" alt="6">
-                <h3>6</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/11.html">
+                    <img class="card-img-top" src="../static/images/projects/11/image_118.jpeg" alt="11">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/11.html" class="btn btn-light">11</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/11.html">
-                <img src="/static/images/projects/11/image_118.jpeg" alt="11">
-                <h3>11</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/6.html">
+                    <img class="card-img-top" src="../static/images/projects/6/zzz_description.txt" alt="6">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/6.html" class="btn btn-light">6</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/3.html">
-                <img src="/static/images/projects/3/image_92.jpeg" alt="3">
-                <h3>3</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/3.html">
+                    <img class="card-img-top" src="../static/images/projects/3/zzz_description.txt" alt="3">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/3.html" class="btn btn-light">3</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/7.html">
-                <img src="/static/images/projects/7/zzz_description.txt" alt="7">
-                <h3>7</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/10.html">
+                    <img class="card-img-top" src="../static/images/projects/10/zzz_description.txt" alt="10">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/10.html" class="btn btn-light">10</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/10.html">
-                <img src="/static/images/projects/10/image_112.jpeg" alt="10">
-                <h3>10</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/8.html">
+                    <img class="card-img-top" src="../static/images/projects/8/zzz_description.txt" alt="8">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/8.html" class="btn btn-light">8</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/4.html">
-                <img src="/static/images/projects/4/image_95.jpeg" alt="4">
-                <h3>4</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/7.html">
+                    <img class="card-img-top" src="../static/images/projects/7/zzz_description.txt" alt="7">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/7.html" class="btn btn-light">7</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/9.html">
-                <img src="/static/images/projects/9/.DS_Store" alt="9">
-                <h3>9</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/Turn%20over%20Unit%20(Model%20House).html">
+                    <img class="card-img-top" src="../static/images/projects/Turn%20over%20Unit%20(Model%20House)/zzz_description.txt" alt="Turn over Unit (Model House)">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/Turn%20over%20Unit%20(Model%20House).html" class="btn btn-light">Turn over Unit (Model House)</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/Turn%20over%20Unit%20(Model%20House).html">
-                <img src="/static/images/projects/Turn%20over%20Unit%20(Model%20House)/image_137.jpeg" alt="Turn over Unit (Model House)">
-                <h3>Turn over Unit (Model House)</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/12.html">
+                    <img class="card-img-top" src="../static/images/projects/12/zzz_description.txt" alt="12">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/12.html" class="btn btn-light">12</a>
+                </div>
+            </div>
         </div>
         
         <div class="grid-item">
-            <a href="/project/13.html">
-                <img src="/static/images/projects/13/zzz_description.txt" alt="13">
-                <h3>13</h3>
-            </a>
+            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
+                <a href="../project/13.html">
+                    <img class="card-img-top" src="../static/images/projects/13/zzz_description.txt" alt="13">
+                </a>
+                <div class="card-body text-white">
+                    <!-- <p class="card-text">test</p> -->
+                    <a href="../project/13.html" class="btn btn-light">13</a>
+                </div>
+            </div>
         </div>
         
     </div>
+
 </section>
 
     </main>
-    <footer>
+    <footer class="text-center">
         <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.</p>
     </footer>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <script src="../static/js/modal.js"></script>
     
 </body>
 </html>

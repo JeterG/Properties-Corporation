@@ -17,8 +17,11 @@
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    max-width: 100%; /* Ensure it doesn't overflow */
+    max-height: 80%; /* Limit height to 80% of the viewport */
+    width: 500px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    object-fit: contain; /* Maintain the aspect ratio within given size */
 }
 
 /* Add Animation - Zoom in the Modal */
