@@ -1,337 +1,720 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c8102e">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Calamba Expressive Properties</title>
-    <!-- Include Bootstrap CSS -->
+    <meta name="description"
+        content="Browse our portfolio of quality properties in Calamba, Laguna. Houses, lots, condominiums, and investment properties available for sale and rent.">
+    <meta name="keywords"
+        content="properties for sale Calamba, houses for sale Laguna, lots for sale Calamba, condos Laguna, real estate projects Philippines">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.calambaexpressive.com/projects">
+    <meta property="og:title" content="Properties & Projects - Calamba Expressive Properties">
+    <meta property="og:description"
+        content="Explore our portfolio of quality properties in Calamba, Laguna. Find your perfect home or investment today.">
+    <meta property="og:image" content="https://www.calambaexpressive.com/static/images/icon.jpg">
+
+    <title>Properties & Projects in Calamba, Laguna | Houses, Lots & Condos for Sale</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/P/static/css/styles.css">
-    <link rel="stylesheet" href="/P/static/css/modal.css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/modern-styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/icon.jpg" type="image/x-icon">
     <style>
-        /* Main layout styling to make footer stick to the bottom */
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
+        .projects-container {
+            padding: 40px 0;
+            min-height: calc(100vh - 80px) !important;
         }
 
-        main {
-            flex: 1; /* This will make the main content area expand to fill available space */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
-        .navbar-custom {
-            background-color: #c8102e !important; /* Navbar background color */
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
         }
 
-        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
-            color: #f3ef11 !important; /* Navbar text color */
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
-        /* Footer styling */
-        footer {
-            background-color: #c8102e; /* Footer background color */
-            color: #f3ef11; /* Footer text color */
-            padding: 20px 0;
+        .project-image {
             width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .project-image-wrapper {
             position: relative;
-            bottom: 0;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-location {
+            color: #69707f;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 15px;
+            color: #69707f;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--warm-brown) 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filters-container {
+            max-width: 100%;
+            margin: 0 auto 20px;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #dadce0;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .category-tab {
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            font-weight: 500;
+        }
+
+        .category-tab:hover {
+            color: #202124;
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .category-tab.active {
+            color: transparent;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(135deg, #c8102e 0%, #a77846 100%) 1;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
+        }
+
+        .stats-bar {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #69707f;
+            font-size: 0.95rem;
+        }
+
+        .stats-bar strong {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================
+           SKELETON LOADING STYLES
+           ============================================ */
+
+        .skeleton-wrapper {
+            display: none;
+        }
+
+        .skeleton-wrapper.show {
+            display: block;
+        }
+
+        #skeleton-grid.show {
+            display: grid !important;
+        }
+
+        .skeleton {
+            background: #e0e0e0;
+            background-image: linear-gradient(90deg,
+                    #e0e0e0 0px,
+                    #f0f0f0 40px,
+                    #e0e0e0 80px);
+            background-size: 400px 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .skeleton-header {
+            height: 50px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .skeleton-tab {
+            height: 40px;
+            width: 80px;
+            border-radius: 4px;
+        }
+
+        .skeleton-search {
+            height: 50px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skeleton-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .skeleton-image {
+            width: 100%;
+            height: 220px;
+        }
+
+        .skeleton-content {
+            padding: 20px;
+        }
+
+        .skeleton-title {
+            height: 28px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 80%;
+        }
+
+        .skeleton-location {
+            height: 20px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            width: 60%;
+        }
+
+        .skeleton-meta {
+            height: 18px;
+            border-radius: 4px;
+            width: 40%;
+        }
+
+        .skeleton-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            height: 28px;
+            width: 80px;
+            border-radius: 20px;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #69707f;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .filters-container {
+                flex-direction: column;
+            }
+
+            .category-tabs {
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .skeleton-tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
         }
     </style>
-
-    <link rel="icon" href="/P/static/images/icon.jpg" type="image/x-icon">
-
-    
-<style>
-    /* Grid container to align the projects in a grid */
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
-        grid-gap: 40px; /* Increased gap between items */
-        margin-top: 20px;
-    }
-
-    /* Style for each grid item */
-    .grid-item {
-        display: flex;
-        justify-content: center;
-        padding: 20px; /* Add padding to create more separation */
-    }
-
-    /* Card styling */
-    .card {
-        width: 100%; /* Ensure card takes up full width of the grid item */
-        border-radius: 8px;
-        background-color: #c8102e;
-        color: white;
-        border: 2px solid #f3ef11; /* Add a border to the card itself */
-    }
-
-    .card-body {
-        background-color: #c8102e;
-        color: white;
-    }
-
-    .btn-light {
-        background-color: #f3ef11;
-        color: #c8102e;
-    }
-
-    .btn-light:hover {
-        background-color: #c8102e;
-        color: white;
-    }
-
-    /* Card image */
-    .card-img-top {
-        max-height: 200px;
-        object-fit: cover; /* Ensures the image covers the card without distortion */
-    }
-</style>
-
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/P/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/projects.html">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/team.html">Our Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/achievements.html">Achievements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/partners.html">Partners</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/contact.html">Contact Us</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Excellence in Real Estate
-                </span>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
+
     <main>
-        
-<section>
-    <h2>Our Projects</h2>
+        <div class="container projects-container">
+            <!-- Skeleton Loading for Title -->
+            <div id="skeleton-title" class="skeleton-wrapper show">
+                <div class="skeleton skeleton-header" style="max-width: 400px; margin: 0 auto 15px;"></div>
+                <div class="skeleton skeleton-header"
+                    style="max-width: 500px; height: 24px; margin: 0 auto; margin-bottom: 10px;"></div>
+            </div>
 
-    <!-- Grid container for projects -->
-    <div class="grid-container">
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/9.html">
-                    <img class="card-img-top" src="/P/static/images/projects/9/Image_108.jpeg" alt="9">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/9.html" class="btn btn-light">9</a>
-                </div>
+            <!-- Actual Title -->
+            <div id="actual-title" style="display: none;">
+                <h1 class="section-title text-center" style="color: transparent !important;">
+                    <span class="gradient-text">Our Projects</span>
+                </h1>
+                <p class="section-subtitle text-center">Explore our portfolio of quality properties in Calamba, Laguna
+                </p>
             </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/4.html">
-                    <img class="card-img-top" src="/P/static/images/projects/4/image_97.jpeg" alt="4">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/4.html" class="btn btn-light">4</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/5.html">
-                    <img class="card-img-top" src="/P/static/images/projects/5/a.jpeg" alt="5">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/5.html" class="btn btn-light">5</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/2.html">
-                    <img class="card-img-top" src="/P/static/images/projects/2/image_90.jpeg" alt="2">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/2.html" class="btn btn-light">2</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/14.html">
-                    <img class="card-img-top" src="/P/static/images/projects/14/image_127.jpeg" alt="14">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/14.html" class="btn btn-light">14</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/1.html">
-                    <img class="card-img-top" src="/P/static/images/projects/1/image_81.jpeg" alt="1">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/1.html" class="btn btn-light">1</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/11.html">
-                    <img class="card-img-top" src="/P/static/images/projects/11/image_118.jpeg" alt="11">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/11.html" class="btn btn-light">11</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/6.html">
-                    <img class="card-img-top" src="/P/static/images/projects/6/image_102.jpeg" alt="6">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/6.html" class="btn btn-light">6</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/3.html">
-                    <img class="card-img-top" src="/P/static/images/projects/3/image_92.jpeg" alt="3">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/3.html" class="btn btn-light">3</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/10.html">
-                    <img class="card-img-top" src="/P/static/images/projects/10/image_111.jpeg" alt="10">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/10.html" class="btn btn-light">10</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/8.html">
-                    <img class="card-img-top" src="/P/static/images/projects/8/image_106.jpeg" alt="8">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/8.html" class="btn btn-light">8</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/7.html">
-                    <img class="card-img-top" src="/P/static/images/projects/7/Image_104.jpeg" alt="7">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/7.html" class="btn btn-light">7</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/Turn%20over%20Unit%20(Model%20House).html">
-                    <img class="card-img-top" src="/P/static/images/projects/Turn%20over%20Unit%20(Model%20House)/image_142.jpeg" alt="Turn over Unit (Model House)">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/Turn%20over%20Unit%20(Model%20House).html" class="btn btn-light">Turn over Unit (Model House)</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid-item">
-            <div class="card" style="background-color: #c8102e; border-color: #c8102e;">
-                <a href="/P/project/12.html">
-                    <img class="card-img-top" src="/P/static/images/projects/12/image_123.jpeg" alt="12">
-                </a>
-                <div class="card-body text-white">
-                    <!-- <p class="card-text">test</p> -->
-                    <a href="/P/project/12.html" class="btn btn-light">12</a>
-                </div>
-            </div>
-        </div>
-        
-    </div>
 
-</section>
+            <!-- Skeleton Loading for Filters -->
+            <div id="skeleton-filters" class="filters-container skeleton-wrapper show">
+                <div class="skeleton-tabs">
+                    <div class="skeleton skeleton-tab"></div>
+                    <div class="skeleton skeleton-tab"></div>
+                    <div class="skeleton skeleton-tab"></div>
+                    <div class="skeleton skeleton-tab"></div>
+                    <div class="skeleton skeleton-tab"></div>
+                </div>
+                <div class="skeleton skeleton-search"></div>
+            </div>
 
+            <!-- Actual Filters -->
+            <div class="filters-container" id="actual-filters" style="display: none;">
+                <!-- Category Tabs -->
+                <div class="category-tabs" id="categoryTabs">
+                    <button class="category-tab active" data-category="all" onclick="selectCategory('all')">
+                        All
+                    </button>
+                    <!-- More tabs will be added by JavaScript -->
+                </div>
+
+                <!-- Search -->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search projects..."
+                        onkeyup="handleSearchInput()">
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div id="stats-bar" class="stats-bar" style="display: none;">
+                Showing <strong id="visible-count">0</strong> of <strong id="total-count">0</strong> properties
+            </div>
+
+            <!-- Skeleton Loading for Projects Grid -->
+            <div id="skeleton-grid" class="projects-grid skeleton-wrapper show">
+                <!-- Generate 6 skeleton cards -->
+                <div class="skeleton-card">
+                    <div class="project-image-wrapper">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="skeleton skeleton-badge"></div>
+                    </div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-location"></div>
+                        <div class="skeleton skeleton-meta"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="project-image-wrapper">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="skeleton skeleton-badge"></div>
+                    </div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-location"></div>
+                        <div class="skeleton skeleton-meta"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="project-image-wrapper">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="skeleton skeleton-badge"></div>
+                    </div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-location"></div>
+                        <div class="skeleton skeleton-meta"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="project-image-wrapper">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="skeleton skeleton-badge"></div>
+                    </div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-location"></div>
+                        <div class="skeleton skeleton-meta"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="project-image-wrapper">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="skeleton skeleton-badge"></div>
+                    </div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-location"></div>
+                        <div class="skeleton skeleton-meta"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="project-image-wrapper">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="skeleton skeleton-badge"></div>
+                    </div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-location"></div>
+                        <div class="skeleton skeleton-meta"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual Projects Grid -->
+            <div id="projects-grid" class="projects-grid" style="display: none;">
+                <!-- Cards populated by JavaScript -->
+            </div>
+
+            <!-- No Results -->
+            <div id="no-results" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No properties found</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+        </div>
     </main>
-    <footer class="text-center">
-        <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.
-            
-        </p>
-        <a id="whatsappLink" target="_blank" class="whatsapp-link" href="https://wa.me/639276154651?text=Hello%2C%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20listings%20Could%20you%20please%20provide%20more%20details%3F">
-            <i class="fab fa-whatsapp whatsapp-icon"></i>
-        </a>
-        <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information." target="_self" class="email-link">
-            <i class="fas fa-envelope"></i> 
-        </a>
-        
-    </footer>
 
-    <!-- Include Bootstrap JS and dependencies -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    <script src="/P/static/js/modal.js"></script>
-    
+    <script src="/static/js/enhanced-modal.js"></script>
+
+    <!-- Load Properties Data -->
+    <script src="/static/js/properties.js?v=1765739795994"></script>
+
+    <script>
+        let allCards = [];
+        let currentCategory = 'all';
+        let searchTimeout = null;
+
+        // Get URL parameter helper function
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function selectCategory(category) {
+            currentCategory = category;
+
+            // Update URL without reloading page
+            const url = new URL(window.location);
+            if (category === 'all') {
+                url.searchParams.delete('category');
+            } else {
+                url.searchParams.set('category', category);
+            }
+            window.history.replaceState({}, '', url);
+
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            const activeTab = document.querySelector(`.category-tab[data-category="${category}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+
+            // Show skeleton, hide actual grid
+            const skeletonGrid = document.getElementById('skeleton-grid');
+            const projectsGrid = document.getElementById('projects-grid');
+            const noResults = document.getElementById('no-results');
+            const statsBar = document.getElementById('stats-bar');
+
+            projectsGrid.style.display = 'none';
+            noResults.style.display = 'none';
+            statsBar.style.display = 'none';
+            skeletonGrid.classList.add('show');
+
+            // Delay to show skeleton animation
+            setTimeout(() => {
+                filterProjects();
+
+                // Hide skeleton, show actual grid
+                skeletonGrid.classList.remove('show');
+                statsBar.style.display = 'block';
+            }, 400);
+        }
+
+        // Handle search input with debounce and skeleton
+        function handleSearchInput() {
+            // Clear existing timeout
+            if (searchTimeout) {
+                clearTimeout(searchTimeout);
+            }
+
+            // Show skeleton immediately
+            const skeletonGrid = document.getElementById('skeleton-grid');
+            const projectsGrid = document.getElementById('projects-grid');
+            const noResults = document.getElementById('no-results');
+            const statsBar = document.getElementById('stats-bar');
+
+            projectsGrid.style.display = 'none';
+            noResults.style.display = 'none';
+            statsBar.style.display = 'none';
+            skeletonGrid.classList.add('show');
+
+            // Set new timeout for search
+            searchTimeout = setTimeout(() => {
+                filterProjects();
+
+                // Hide skeleton after filtering
+                setTimeout(() => {
+                    skeletonGrid.classList.remove('show');
+                    statsBar.style.display = 'block';
+                }, 300);
+            }, 400);
+        }
+
+        async function loadProjects() {
+            const grid = document.getElementById('projects-grid');
+            const skeletonGrid = document.getElementById('skeleton-grid');
+            const skeletonFilters = document.getElementById('skeleton-filters');
+            const actualFilters = document.getElementById('actual-filters');
+            const categoryTabs = document.getElementById('categoryTabs');
+            const categories = window.PROPERTY_DATA.categories || [];
+            const projectsByCategory = window.PROPERTY_DATA.projectsByCategory;
+
+            // Add all category tabs
+            categories.forEach(category => {
+                const tab = document.createElement('button');
+                tab.className = 'category-tab';
+                tab.setAttribute('data-category', category.id);
+                tab.textContent = category.name;
+                tab.onclick = () => selectCategory(category.id);
+                categoryTabs.appendChild(tab);
+            });
+
+            // Simulate loading delay to show skeleton
+            setTimeout(async () => {
+                // Hide skeletons
+                skeletonGrid.classList.remove('show');
+                skeletonFilters.classList.remove('show');
+                document.getElementById('skeleton-title').classList.remove('show');
+
+                // Show actual content
+                grid.style.display = 'grid';
+                actualFilters.style.display = 'block';
+                document.getElementById('actual-title').style.display = 'block';
+                document.getElementById('stats-bar').style.display = 'block';
+
+                let totalProjects = 0;
+
+                // Loop through each category
+                for (let category in projectsByCategory) {
+                    const projects = projectsByCategory[category];
+                    const categoryName = window.PROPERTY_DATA.getCategoryName(category);
+
+                    // Loop through each project in the category
+                    for (let id in projects) {
+                        const project = projects[id];
+                        if (!project.images || project.images.length === 0) continue;
+
+                        // Get full property data with correct location
+                        const fullProperty = await window.PROPERTY_DATA.getProperty(category, id);
+                        const firstImage = fullProperty.images[0];
+
+                        const card = document.createElement('div');
+                        card.className = 'project-card';
+                        card.setAttribute('data-name', fullProperty.name.toLowerCase());
+                        card.setAttribute('data-location', fullProperty.location.toLowerCase());
+                        card.setAttribute('data-category', category);
+                        card.onclick = () => window.location.href = `/property?category=${category}&id=${id}`;
+
+                        card.innerHTML = `
+                    <div class="project-image-wrapper">
+                        <img src="${firstImage}" alt="${fullProperty.name}" class="project-image">
+                        <div class="category-badge">${categoryName}</div>
+                    </div>
+                    <div class="project-content">
+                        <strong class="project-title">${fullProperty.name}</strong>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i> ${fullProperty.location}
+                        </div>
+                        <div class="project-meta">
+                            ${fullProperty.price ? `<span><i class="fas fa-tag"></i> ${fullProperty.price}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                        grid.appendChild(card);
+                        allCards.push(card);
+                        totalProjects++;
+                    }
+                }
+
+                console.log(`✅ Loaded ${totalProjects} projects across ${Object.keys(projectsByCategory).length} categories`);
+
+                // Check for saved category from URL and restore it
+                const savedCategory = getUrlParameter('category');
+                if (savedCategory) {
+                    selectCategory(savedCategory);
+                } else {
+                    selectCategory('all');
+                }
+
+                updateStats();
+            }, 800);
+        }
+
+        function filterProjects() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+            let visibleCount = 0;
+
+            allCards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const location = card.getAttribute('data-location');
+                const category = card.getAttribute('data-category');
+
+                const matchesSearch = name.includes(searchInput);
+                const matchesCategory = currentCategory === 'all' || category === currentCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            const noResults = document.getElementById('no-results');
+            const grid = document.getElementById('projects-grid');
+
+            if (visibleCount === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                grid.style.display = 'grid';
+                noResults.style.display = 'none';
+            }
+
+            updateStats();
+        }
+
+        function updateStats() {
+            const visibleCards = allCards.filter(card => card.style.display !== 'none');
+            document.getElementById('visible-count').textContent = visibleCards.length;
+            document.getElementById('total-count').textContent = allCards.length;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProjects);
+    </script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/footer.js"></script>
 </body>
+
 </html>

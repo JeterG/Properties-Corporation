@@ -1,150 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c8102e">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Calamba Expressive Properties</title>
-    <!-- Include Bootstrap CSS -->
+    <meta name="description"
+        content="Contact Calamba Expressive Properties - Reach us via WhatsApp (+63 927 615 4651), email (cepc.development@gmail.com), or Facebook. Office in Calamba, Laguna, Philippines.">
+    <meta name="keywords"
+        content="contact Calamba Expressive Properties, real estate inquiry Laguna, property consultation Calamba, WhatsApp real estate Philippines">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.calambaexpressive.com/contact">
+    <meta property="og:title" content="Contact Us - Calamba Expressive Properties">
+    <meta property="og:description"
+        content="Get in touch via WhatsApp, email, or Facebook. We're here to help you find your perfect property.">
+    <meta property="og:image" content="https://www.calambaexpressive.com/static/images/icon.jpg">
+
+    <title>Contact Us - Calamba Expressive Properties | Get in Touch Today</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/P/static/css/styles.css">
-    <link rel="stylesheet" href="/P/static/css/modal.css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/modern-styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/icon.jpg" type="image/x-icon">
     <style>
-        /* Main layout styling to make footer stick to the bottom */
-        html, body {
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+
+        .contact-icon .fa-facebook-messenger {
+            background: linear-gradient(135deg, #0084FF 0%, #0063CC 100%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .contact-icon .fa-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .contact-icon .fa-envelope {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .contact-icon .fa-clock {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .contact-icon .fa-map-marker-alt {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .contact-icon .fa-clipboard-list {
+            background: linear-gradient(135deg, #2a2a33 0%, #1a1a20 100%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .contact-card p {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: white !important;
+        }
+
+        .contact-link.whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+
+        .contact-link.email {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+        }
+
+        .contact-icon i {
+            color: white !important;
+            -webkit-text-fill-color: white !important;
+        }
+
+        .contact-card {
             height: 100%;
-            margin: 0;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
         }
 
-        main {
-            flex: 1; /* This will make the main content area expand to fill available space */
+        .contact-card p {
+            flex-grow: 1;
         }
 
-        .navbar-custom {
-            background-color: #c8102e !important; /* Navbar background color */
+        .contact-card .contact-link {
+            width: auto;
+            display: inline-flex;
+            margin: 0 auto;
         }
 
-        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
-            color: #f3ef11 !important; /* Navbar text color */
+        /* Skeleton Loading Styles */
+        .skeleton {
+            background: #e0e0e0;
+            background-image: linear-gradient(90deg, #e0e0e0 0px, #f0f0f0 40px, #e0e0e0 80px);
+            background-size: 400px 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+            border-radius: 8px;
         }
 
-        /* Footer styling */
-        footer {
-            background-color: #c8102e; /* Footer background color */
-            color: #f3ef11; /* Footer text color */
-            padding: 20px 0;
-            width: 100%;
-            position: relative;
-            bottom: 0;
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .skeleton-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .skeleton-contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .skeleton-contact-title {
+            height: 28px;
+            width: 180px;
+            margin: 0 auto 10px;
+        }
+
+        .skeleton-contact-text {
+            height: 20px;
+            width: 150px;
+            margin: 0 auto 25px;
+        }
+
+        .skeleton-contact-button {
+            height: 45px;
+            width: 160px;
+            margin: 0 auto;
+            border-radius: 25px;
+        }
+
+        .skeleton-social-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-social-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-social-title {
+            height: 32px;
+            width: 300px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-social-text {
+            height: 18px;
+            margin: 0 auto 0.5rem;
+        }
+
+        .skeleton-social-text:last-of-type {
+            width: 70%;
+            margin-bottom: 1.5rem;
+        }
+
+        .skeleton-social-button {
+            height: 50px;
+            width: 250px;
+            margin: 0 auto 1rem;
+            border-radius: 8px;
+        }
+
+        .skeleton-social-rating {
+            height: 16px;
+            width: 280px;
+            margin: 0 auto;
+        }
+
+        .skeleton-bottom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .skeleton-info-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .skeleton-info-title {
+            height: 28px;
+            width: 150px;
+            margin: 0 auto 10px;
+        }
+
+        .skeleton-info-text {
+            height: 18px;
+            margin: 0 auto 8px;
+        }
+
+        .skeleton-info-text:last-child {
+            width: 80%;
+        }
+
+        @media (max-width: 768px) {
+            .skeleton-title {
+                width: 90%;
+            }
+
+            .skeleton-subtitle {
+                width: 95%;
+            }
+
+            .skeleton-contact-grid,
+            .skeleton-bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-card .contact-link {
+            width: auto;
+            display: inline-flex;
+            margin: 0 auto;
+        }
+
+        /* Facebook card button hover fix */
+        .property-card .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0.95;
+        }
+
+        .property-card .btn {
+            transition: all 0.3s ease;
         }
     </style>
-
-    <link rel="icon" href="/P/static/images/icon.jpg" type="image/x-icon">
-
-    
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/P/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/projects.html">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/team.html">Our Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/achievements.html">Achievements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/partners.html">Partners</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/contact.html">Contact Us</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Excellence in Real Estate
-                </span>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
+
     <main>
-        
-<div class="container mt-5 text-center">
-    <p>
-        Cellphone # Globe 0927 615 4651
-        0977 054 9679 
-        Email : cepc.developement@gmail.com / manguiaterlinda6@gmail.com
-    </p>
-    <h2>Follow Us on Facebook</h2>
-    <a href="https://www.facebook.com/expressivesrealty.lynmanguiat/" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"
-            width="100" height="100">
-    </a>
-    
-</div>
-<div class="container mt-5 text-center">
-    <!-- WhatsApp Link with Icon -->
-    <a id="whatsappLink" target="_blank" class="whatsapp-link">
-        <i class="fab fa-whatsapp whatsapp-icon"></i>
-        Message Us on WhatsApp
-    </a>
-</div>
-<div class="container mt-5 text-center">
-    <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information." target="_self" class="email-link">
-        <i class="fas fa-envelope"></i> Email Us
-    </a>
-    
-</div>
+        <div class="container mt-5">
+            <!-- Skeleton Loading -->
+            <div id="skeleton-content">
+                <div class="skeleton-header">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-subtitle"></div>
+                </div>
 
+                <!-- Contact Methods Skeleton -->
+                <div class="skeleton-contact-grid">
+                    <div class="skeleton-contact-card">
+                        <div class="skeleton skeleton-contact-icon"></div>
+                        <div class="skeleton skeleton-contact-title"></div>
+                        <div class="skeleton skeleton-contact-text"></div>
+                        <div class="skeleton skeleton-contact-button"></div>
+                    </div>
+                    <div class="skeleton-contact-card">
+                        <div class="skeleton skeleton-contact-icon"></div>
+                        <div class="skeleton skeleton-contact-title"></div>
+                        <div class="skeleton skeleton-contact-text"></div>
+                        <div class="skeleton skeleton-contact-button"></div>
+                    </div>
+                    <div class="skeleton-contact-card">
+                        <div class="skeleton skeleton-contact-icon"></div>
+                        <div class="skeleton skeleton-contact-title"></div>
+                        <div class="skeleton skeleton-contact-text"></div>
+                        <div class="skeleton skeleton-contact-button"></div>
+                    </div>
+                </div>
+
+                <!-- Social Media Skeleton -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="skeleton-social-card">
+                            <div class="skeleton skeleton-social-icon"></div>
+                            <div class="skeleton skeleton-social-title"></div>
+                            <div class="skeleton skeleton-social-text"></div>
+                            <div class="skeleton skeleton-social-text"></div>
+                            <div class="skeleton skeleton-social-text"></div>
+                            <div class="skeleton skeleton-social-button"></div>
+                            <div class="skeleton skeleton-social-rating"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Section Skeleton -->
+                <div class="skeleton-bottom-grid">
+                    <div class="skeleton-info-card">
+                        <div class="skeleton skeleton-info-icon"></div>
+                        <div class="skeleton skeleton-info-title"></div>
+                        <div class="skeleton skeleton-info-text"></div>
+                        <div class="skeleton skeleton-info-text"></div>
+                        <div class="skeleton skeleton-info-text"></div>
+                    </div>
+                    <div class="skeleton-info-card">
+                        <div class="skeleton skeleton-info-icon"></div>
+                        <div class="skeleton skeleton-info-title"></div>
+                        <div class="skeleton skeleton-info-text"></div>
+                        <div class="skeleton skeleton-contact-button"></div>
+                    </div>
+                    <div class="skeleton-info-card">
+                        <div class="skeleton skeleton-info-icon"></div>
+                        <div class="skeleton skeleton-info-title"></div>
+                        <div class="skeleton skeleton-info-text"></div>
+                        <div class="skeleton skeleton-info-text"></div>
+                        <div class="skeleton skeleton-info-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual Content -->
+            <div id="contact-content" style="display: none;">
+                <h1 class="section-title">Ready to Find Your Dream Property?</h1>
+                <p class="section-subtitle">Contact us today and let our experienced team guide you through your real
+                    estate
+                    journey.</p>
+
+                <!-- Contact Methods -->
+                <div class="contact-grid">
+                    <!-- Facebook Messenger -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-facebook-messenger"></i>
+                        </div>
+                        <h3>Message Us on Facebook</h3>
+                        <p>Chat with us instantly</p>
+                        <a href="https://m.me/103618938300166?text=Hello!%20I'm%20interested%20in%20learning%20more%20about%20Calamba%20Expressive%20Properties.%20Could%20you%20please%20provide%20more%20details%3F"
+                            target="_blank" class="contact-link"
+                            style="background: linear-gradient(135deg, #0084FF 0%, #0063CC 100%);">
+                            <i class="fab fa-facebook-messenger"></i> Send Message
+                        </a>
+                    </div>
+
+                    <!-- WhatsApp Message -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp Us</h3>
+                        <p>Quick and easy messaging</p>
+                        <a href="https://wa.me/639276154651?text=Hello%2C%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20listings%20Could%20you%20please%20provide%20more%20details%3F"
+                            target="_blank" class="contact-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> Send Message
+                        </a>
+                    </div>
+
+                    <!-- Email Contact -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Us</h3>
+                        <p>Send us your inquiries</p>
+                        <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information."
+                            class="contact-link email">
+                            <i class="fas fa-envelope"></i> Send Email
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Media Section -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="property-card fade-in"
+                            style="background: linear-gradient(135deg, #1877f2 0%, #0c5ba8 100%); color: white;">
+                            <div class="property-card-body text-center">
+                                <div class="mb-2" style="font-size: 2.5rem;">
+                                    <i class="fab fa-facebook"></i>
+                                </div>
+                                <h3 class="property-card-title"
+                                    style="color: white; font-weight: bold; font-size: 1.5rem; margin-bottom: 8px;">
+                                    Follow
+                                    Us on Facebook</h3>
+                                <p class="property-card-text"
+                                    style="color: rgba(255, 255, 255, 0.95); font-size: 0.95rem; margin-bottom: 20px;">
+                                    Stay updated with our latest properties, success stories, and real estate tips.
+                                    Join our community of 8.8K followers and see why we're recognized as a trusted
+                                    facilitator in the real estate industry with 100% recommendations.
+                                </p>
+                                <div class="mt-4 mb-2">
+                                    <a href="https://www.facebook.com/expressivesrealty.lynmanguiat/" target="_blank"
+                                        rel="noopener noreferrer" class="btn btn-primary btn-lg"
+                                        style="font-weight: bold; padding: 12px 30px; border-radius: 8px;">
+                                        <i class="fab fa-facebook"></i> Visit Our Facebook Page
+                                    </a>
+                                </div>
+                                <p class="mt-2 mb-0" style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">
+                                    <i class="fas fa-star"></i> 100% Recommend (12 Reviews) • 8.8K Followers
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Office Hours, Submit Inquiry & Location -->
+                <div class="row mt-4 mb-5">
+                    <div class="col-lg-4 mb-4">
+                        <div class="contact-card" style="animation-delay: 0.5s;">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>Office Hours</h3>
+                            <p style="font-size: 1.1rem; line-height: 2;">
+                                <strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM<br>
+                                <strong>Saturday:</strong> 9:00 AM - 4:00 PM<br>
+                                <strong>Sunday:</strong> By Appointment
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4">
+                        <div class="contact-card" style="animation-delay: 0.55s;">
+                            <div class="contact-icon">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <h3>Submit an Inquiry</h3>
+                            <p>Fill out our form for detailed assistance</p>
+                            <button onclick="openInquiryForm()" class="contact-link"
+                                style="background: linear-gradient(135deg, #2a2a33 0%, #1a1a20 100%); border: none; cursor: pointer; width: auto; display: inline-flex; margin: 0 auto;">
+                                <i class="fas fa-clipboard-list"></i> Submit Inquiry
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4">
+                        <div class="contact-card" style="animation-delay: 0.6s;">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Our Location</h3>
+                            <p style="font-size: 1.1rem; line-height: 2;">
+                                <strong>Calamba, Laguna</strong><br>
+                                Serving Calamba and surrounding areas<br>
+                                Philippines
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer class="text-center">
-        <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.
-            
-        </p>
-        <a id="whatsappLink" target="_blank" class="whatsapp-link" href="https://wa.me/639276154651?text=Hello%2C%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20listings%20Could%20you%20please%20provide%20more%20details%3F">
-            <i class="fab fa-whatsapp whatsapp-icon"></i>
-        </a>
-        <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information." target="_self" class="email-link">
-            <i class="fas fa-envelope"></i> 
-        </a>
-        
-    </footer>
 
-    <!-- Include Bootstrap JS and dependencies -->
+    <div id="footer-container"></div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+    <script src="/static/js/enhanced-modal.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/footer.js"></script>
 
-<script>
-    const phoneNumber = "639276154651";
-    const message = "Hello, I’m interested in learning more about your listings Could you please provide more details?";
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    <script>
+        // Simulate content loading
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                // Hide skeleton
+                document.getElementById('skeleton-content').style.display = 'none';
+                // Show actual content
+                document.getElementById('contact-content').style.display = 'block';
 
-    // Set the href of the link with id "whatsappLink" to the generated WhatsApp link
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("whatsappLink").href = whatsappLink;
-    });
-</script>
+                console.log('✅ Contact content loaded');
+            }, 800); // 800ms delay to simulate loading
+        });
 
+        function openInquiryForm() {
+            const formBaseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdW4qEGG5YwfKj3twGaxF41T5xg0Me5WY3G6b147UL4ujrOsg/viewform';
+
+            const params = new URLSearchParams({
+                'entry.384175351': 'General Inquiry - All Properties',
+                'entry.1764803982': 'Calamba, Laguna, Philippines',
+                'entry.142418475': 'General Inquiry',
+                'entry.19700063': window.location.origin
+            });
+
+            window.open(`${formBaseUrl}?${params.toString()}`, '_blank');
+        }
+    </script>
 </body>
+
 </html>

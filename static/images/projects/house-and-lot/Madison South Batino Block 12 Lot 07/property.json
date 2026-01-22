@@ -1,0 +1,53 @@
+{
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 100 SQM"
+        },
+        {
+            "icon": "fas fa-ruler-combined",
+            "text": "Floor Area: 96 SQM"
+        },
+        {
+            "icon": "fas fa-bed",
+            "text": "3 Bedrooms"
+        },
+        {
+            "icon": "fas fa-hot-tub",
+            "text": "2 Comfort Rooms"
+        },
+        {
+            "icon": "fas fa-utensils",
+            "text": "Kitchen Area"
+        },
+        {
+            "icon": "fas fa-broom",
+            "text": "Service Area"
+        },
+        {
+            "icon": "fas fa-couch",
+            "text": "Living Area"
+        },
+        {
+            "icon": "fas fa-utensils",
+            "text": "Dining Area"
+        },
+        {
+            "icon": "fas fa-home",
+            "text": "Balcony"
+        },
+        {
+            "icon": "fas fa-car",
+            "text": "Car Port"
+        }
+    ],
+    "description": "• School\n• Public Market\n• Commercial Area\n• Transportation\n• Mall\n• Industrial Park\n• Church\n• SLEX (Expressway)",
+    "location": "Calamba City, Laguna",
+    "price": "₱7,000,000.00",
+    "status": "Complete Finished (April 2026 - End of contract rent)",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

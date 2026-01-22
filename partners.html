@@ -1,186 +1,970 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c8102e">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Investors - Calamba Expressive Properties</title>
-    <!-- Include Bootstrap CSS -->
+    <meta name="description"
+        content="Our partnerships with leading real estate developers and investors in the Philippines. Strategic alliances for premium property opportunities in Calamba, Laguna.">
+    <meta name="keywords"
+        content="real estate partners Calamba, property developers Laguna, real estate investors Philippines, Amaia Land partner">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.calambaexpressive.com/partners">
+    <meta property="og:title" content="Partners & Investors - Calamba Expressive Properties">
+    <meta property="og:description"
+        content="Our partnerships with leading developers enable access to premium properties and exclusive opportunities.">
+    <meta property="og:image" content="https://www.calambaexpressive.com/static/images/icon.jpg">
+
+    <title>Partners & Investors - Calamba Expressive Properties | Strategic Real Estate Alliances</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/P/static/css/styles.css">
-    <link rel="stylesheet" href="/P/static/css/modal.css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/modern-styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/icon.jpg" type="image/x-icon">
     <style>
-        /* Main layout styling to make footer stick to the bottom */
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
+        .partners-container {
+            padding: 40px 0 100px;
         }
 
-        main {
-            flex: 1; /* This will make the main content area expand to fill available space */
+        /* Header */
+        .partners-header {
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .navbar-custom {
-            background-color: #c8102e !important; /* Navbar background color */
+        .partners-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
         }
 
-        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
-            color: #f3ef11 !important; /* Navbar text color */
+        .partners-subtitle {
+            font-size: 1.2rem;
+            color: #69707f;
+            margin-bottom: 10px;
         }
 
-        /* Footer styling */
-        footer {
-            background-color: #c8102e; /* Footer background color */
-            color: #f3ef11; /* Footer text color */
-            padding: 20px 0;
+        /* Gallery/Carousel */
+        .partner-gallery {
+            margin-bottom: 2rem;
+        }
+
+        .carousel-inner {
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .carousel-item {
+            background: white;
+        }
+
+        .carousel-item img {
             width: 100%;
+            height: 500px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Scrollable Thumbnail Container */
+        .thumbnail-container {
             position: relative;
-            bottom: 0;
+            margin-top: 1rem;
+        }
+
+        .thumbnail-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #a77846 #f0f0f0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            border-radius: 4px;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+        }
+
+        .thumbnail-grid {
+            display: flex;
+            gap: 0.75rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .thumbnail {
+            min-width: 120px;
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 3px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Active thumbnail border with gradient */
+        .thumbnail.active {
+            border: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #c8102e 0%, #a77846 100%) border-box;
+            box-shadow: 0 0 8px rgba(200, 16, 46, 0.3);
+        }
+
+        /* Scroll Buttons */
+        .thumbnail-scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .thumbnail-scroll-btn:hover {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.5);
+        }
+
+        .thumbnail-scroll-btn.left {
+            left: 0;
+        }
+
+        .thumbnail-scroll-btn.right {
+            right: 0;
+        }
+
+        .thumbnail-scroll-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .section-card h3 {
+            color: transparent;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-card h3 i {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Partner Info List */
+        .info-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .info-item:hover {
+            background: #fff5f7;
+            transform: translateX(4px);
+        }
+
+        .info-item i {
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 24px;
+        }
+
+        .info-item span {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-section h3 {
+            color: transparent;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-section h3 i {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-email {
+            background: #a77846;
+            color: white;
+        }
+
+        .btn-phone {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            color: white;
+        }
+
+        /* Description */
+        .description-text {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: #e0e0e0;
+            background-image: linear-gradient(90deg, #e0e0e0 0px, #f0f0f0 40px, #e0e0e0 80px);
+            background-size: 400px 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .skeleton-carousel {
+            height: 500px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .skeleton-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-thumbnail {
+            height: 100px;
+            border-radius: 8px;
+        }
+
+        .skeleton-section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-text-line {
+            height: 20px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-info-item {
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .skeleton-stat {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .skeleton-stat-number {
+            height: 48px;
+            margin-bottom: 0.5rem;
+        }
+
+        .skeleton-stat-label {
+            height: 18px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .carousel-item img {
+                height: 300px;
+            }
+
+            .skeleton-carousel {
+                height: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .thumbnail {
+                min-width: 80px;
+                width: 80px;
+                height: 70px;
+            }
+
+            .skeleton-thumbnails {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+
+        .section-card h3 span {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .contact-section h3 span {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .btn-messenger {
+            background: #0084FF;
+            color: white;
+        }
+
+        .btn-messenger:hover {
+            background: #0073e6;
+            color: white;
         }
     </style>
-
-    <link rel="icon" href="/P/static/images/icon.jpg" type="image/x-icon">
-
-    
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/P/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/projects.html">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/team.html">Our Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/achievements.html">Achievements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/partners.html">Partners</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/contact.html">Contact Us</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Excellence in Real Estate
-                </span>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
+
     <main>
-        
-<section>
-    <h1 style="text-align: center;">Our Investors</h1>
-    <div class="grid-container">
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_148.jpeg" alt="image_148.jpeg" onclick="openModal('/static/images/partners/image_148.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_169.jpeg" alt="image_169.jpeg" onclick="openModal('/static/images/partners/image_169.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_156.jpeg" alt="image_156.jpeg" onclick="openModal('/static/images/partners/image_156.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_153.jpeg" alt="image_153.jpeg" onclick="openModal('/static/images/partners/image_153.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_155.jpeg" alt="image_155.jpeg" onclick="openModal('/static/images/partners/image_155.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_172.jpeg" alt="image_172.jpeg" onclick="openModal('/static/images/partners/image_172.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_146.jpeg" alt="image_146.jpeg" onclick="openModal('/static/images/partners/image_146.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_170.jpeg" alt="image_170.jpeg" onclick="openModal('/static/images/partners/image_170.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_158.jpeg" alt="image_158.jpeg" onclick="openModal('/static/images/partners/image_158.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_171.jpeg" alt="image_171.jpeg" onclick="openModal('/static/images/partners/image_171.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_151.jpeg" alt="image_151.jpeg" onclick="openModal('/static/images/partners/image_151.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_150.jpeg" alt="image_150.jpeg" onclick="openModal('/static/images/partners/image_150.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_157.jpeg" alt="image_157.jpeg" onclick="openModal('/static/images/partners/image_157.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_168.jpeg" alt="image_168.jpeg" onclick="openModal('/static/images/partners/image_168.jpeg', '')">
-        </div>
-        
-        <div class="grid-item">
-            <img src="/P/static/images/partners/image_152.jpeg" alt="image_152.jpeg" onclick="openModal('/static/images/partners/image_152.jpeg', '')">
-        </div>
-        
-    </div>
-</section>
+        <div class="container partners-container">
+            <!-- Skeleton Loading -->
+            <div id="skeleton-content">
+                <div class="partners-header">
+                    <div class="skeleton" style="height: 48px; width: 400px; margin: 0 auto 15px;"></div>
+                    <div class="skeleton" style="height: 28px; width: 600px; margin: 0 auto 20px;"></div>
+                </div>
 
-<!-- Modal Structure -->
-<div id="myModal" class="modal" onclick="closeModalOnOutsideClick(event)">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImg">
-    <div id="caption"></div>
-</div>
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="skeleton skeleton-carousel"></div>
+                        <div class="skeleton-thumbnails">
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                        </div>
 
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-text-line"></div>
+                            <div class="skeleton skeleton-text-line"></div>
+                            <div class="skeleton skeleton-text-line" style="width: 70%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="stats-grid">
+                            <div class="skeleton-stat">
+                                <div class="skeleton skeleton-stat-number"></div>
+                                <div class="skeleton skeleton-stat-label"></div>
+                            </div>
+                            <div class="skeleton-stat">
+                                <div class="skeleton skeleton-stat-number"></div>
+                                <div class="skeleton skeleton-stat-label"></div>
+                            </div>
+                            <div class="skeleton-stat">
+                                <div class="skeleton skeleton-stat-number"></div>
+                                <div class="skeleton skeleton-stat-label"></div>
+                            </div>
+                        </div>
+
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-info-item"></div>
+                            <div class="skeleton skeleton-info-item"></div>
+                            <div class="skeleton skeleton-info-item"></div>
+                        </div>
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-info-item"></div>
+                            <div class="skeleton skeleton-info-item"></div>
+                            <div class="skeleton skeleton-info-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual Content -->
+            <div id="partners-content" style="display: none;">
+                <!-- Header -->
+                <div class="partners-header">
+                    <h1 class="section-title" style="color: transparent !important;">
+                        <i class="fas fa-handshake gradient-icon"></i>
+                        <span class="gradient-text">Our Partners & Investors</span>
+                    </h1>
+                    <p class="partners-subtitle">
+                        Collaborating with industry leaders to deliver exceptional real estate opportunities
+                    </p>
+                </div>
+
+                <div class="row">
+                    <!-- Left Column: Gallery & Description -->
+                    <div class="col-lg-7 mb-4">
+                        <!-- Partner Gallery -->
+                        <div class="partner-gallery">
+                            <div id="partnerCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+                                <ol class="carousel-indicators" id="carousel-indicators">
+                                    <!-- Populated by JavaScript -->
+                                </ol>
+                                <div class="carousel-inner" id="carousel-inner">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                                <a class="carousel-control-prev" href="#partnerCarousel" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#partnerCarousel" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                            <div class="thumbnail-container">
+                                <button class="thumbnail-scroll-btn left">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <div class="thumbnail-wrapper">
+                                    <div class="thumbnail-grid" id="thumbnail-grid">
+                                        <!-- Populated by JavaScript -->
+                                    </div>
+                                </div>
+                                <button class="thumbnail-scroll-btn right">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- About Partners -->
+                        <div class="section-card">
+                            <h3>
+                                <i class="fas fa-info-circle"></i>
+                                <span>About Our Partnerships</span>
+                            </h3>
+                            <div class="description-text">
+                                Calamba Expressive Properties Corporation is proud to collaborate with some of the most
+                                respected names in the Philippine real estate industry. Our partnerships with leading
+                                developers and investors enable us to offer our clients access to premium properties and
+                                exclusive opportunities.<br><br>
+
+                                These strategic alliances reflect our commitment to quality, innovation, and excellence.
+                                Together with our partners, we continue to shape the future of real estate in Calamba
+                                and beyond, delivering exceptional value and service to every client we serve.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Stats & Contact -->
+                    <div class="col-lg-5">
+                        <!-- Statistics -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number" id="total-partners">15</div>
+                                <div class="stat-label">Partners</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">
+                                    <i class="fas fa-star gradient-icon"></i>
+                                </div>
+                                <div class="stat-label">Excellence</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">
+                                    <i class="fas fa-award gradient-icon"></i>
+                                </div>
+                                <div class="stat-label">Quality</div>
+                            </div>
+                        </div>
+
+                        <!-- Partner Benefits -->
+                        <div class="section-card">
+                            <h3>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Partnership Benefits</span>
+                            </h3>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <i class="fas fa-handshake"></i>
+                                    <span>Access to Premium Properties</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>Collaborative Opportunities</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Market Insights & Expertise</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Trusted & Reliable Network</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-trophy"></i>
+                                    <span>Industry Recognition</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Section -->
+                        <div class="contact-section">
+                            <h3>
+                                <i class="fas fa-phone"></i>
+                                <span>Get In Touch</span>
+                            </h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; text-align: center;">
+                                Interested in partnership opportunities? Contact us today!
+                            </p>
+                            <div class="contact-grid">
+                                <a href="https://wa.me/639276154651?text=Hello!%20I'm%20interested%20in%20partnership%20opportunities%20with%20Calamba%20Expressive%20Properties."
+                                    target="_blank" class="contact-btn btn-whatsapp">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </a>
+
+                                <a href="https://m.me/103618938300166?text=Hello!%20I'm%20interested%20in%20partnership%20opportunities%20with%20Calamba%20Expressive%20Properties."
+                                    target="_blank" class="contact-btn btn-messenger">
+                                    <i class="fab fa-facebook-messenger"></i>
+                                    Messenger
+                                </a>
+
+                                <a href="mailto:cepc.development@gmail.com?subject=Partnership%20Inquiry"
+                                    class="contact-btn btn-email">
+                                    <i class="fas fa-envelope"></i>
+                                    Email Us
+                                </a>
+
+                                <a href="tel:+639770549679" class="contact-btn btn-phone">
+                                    <i class="fas fa-phone"></i>
+                                    0977-054-9679
+                                </a>
+
+                                <a href="tel:+639276154651" class="contact-btn btn-phone">
+                                    <i class="fas fa-phone"></i>
+                                    0927-615-4651
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer class="text-center">
-        <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.
-            
-        </p>
-        <a id="whatsappLink" target="_blank" class="whatsapp-link" href="https://wa.me/639276154651?text=Hello%2C%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20listings%20Could%20you%20please%20provide%20more%20details%3F">
-            <i class="fab fa-whatsapp whatsapp-icon"></i>
-        </a>
-        <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information." target="_self" class="email-link">
-            <i class="fas fa-envelope"></i> 
-        </a>
-        
-    </footer>
 
-    <!-- Include Bootstrap JS and dependencies -->
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" class="lightbox-img" src="" alt="Partner">
+        </div>
+        <div class="lightbox-caption" id="lightbox-caption">Partner Name</div>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-<script src="/P/static/js/modal.js"></script>
+    <script src="/static/js/partners.js?v=1765739795994"></script>
 
+    <script>
+        function loadPartners() {
+            const partners = window.PARTNERS_DATA.partners;
+            const basePath = window.PARTNERS_DATA.basePath;
+
+            setTimeout(() => {
+                // Hide skeleton
+                document.getElementById('skeleton-content').style.display = 'none';
+                document.getElementById('partners-content').style.display = 'block';
+
+                // Update total count
+                document.getElementById('total-partners').textContent = partners.length;
+
+                // Populate carousel
+                const carouselInner = document.getElementById('carousel-inner');
+                const carouselIndicators = document.getElementById('carousel-indicators');
+                const thumbnailGrid = document.getElementById('thumbnail-grid');
+
+                partners.forEach((partner, index) => {
+                    const imagePath = basePath + partner.filename;
+
+                    // Carousel indicators
+                    const indicator = document.createElement('li');
+                    indicator.setAttribute('data-target', '#partnerCarousel');
+                    indicator.setAttribute('data-slide-to', index);
+                    if (index === 0) indicator.classList.add('active');
+                    carouselIndicators.appendChild(indicator);
+
+                    // Carousel items
+                    const carouselItem = document.createElement('div');
+                    carouselItem.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+                    carouselItem.innerHTML = `
+                    <img src="${imagePath}" alt="${partner.title}" onclick="openLightbox('${imagePath}', '${partner.title}')">
+                `;
+                    carouselInner.appendChild(carouselItem);
+
+                    // Thumbnails
+                    const thumbnail = document.createElement('img');
+                    thumbnail.src = imagePath;
+                    thumbnail.alt = partner.title;
+                    thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                    thumbnail.onclick = () => changeSlide(index);
+                    thumbnail.setAttribute('data-index', index);
+                    thumbnailGrid.appendChild(thumbnail);
+                });
+
+                // Initialize scroll buttons
+                initThumbnailScroll();
+
+                console.log(`✅ Loaded ${partners.length} partners`);
+            }, 800);
+        }
+
+        function initThumbnailScroll() {
+            const leftBtn = document.querySelector('.thumbnail-scroll-btn.left');
+            const rightBtn = document.querySelector('.thumbnail-scroll-btn.right');
+
+            if (!leftBtn || !rightBtn) return;
+
+            // Get total number of slides
+            const totalSlides = document.querySelectorAll('.thumbnail').length;
+            let currentIndex = 0;
+
+            leftBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                changeSlide(currentIndex);
+            });
+
+            rightBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                changeSlide(currentIndex);
+            });
+
+            // Update current index when carousel changes
+            $('#partnerCarousel').on('slid.bs.carousel', function (e) {
+                currentIndex = $(e.relatedTarget).index();
+            });
+
+            // Update button states (optional - always enabled for cycling)
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            // Both buttons always enabled since we cycle through
+            const leftBtn = document.querySelector('.thumbnail-scroll-btn.left');
+            const rightBtn = document.querySelector('.thumbnail-scroll-btn.right');
+            if (leftBtn) leftBtn.disabled = false;
+            if (rightBtn) rightBtn.disabled = false;
+        }
+
+        function changeSlide(index) {
+            $('#partnerCarousel').carousel(index);
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const wrapper = document.querySelector('.thumbnail-wrapper');
+
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+                if (i === index && wrapper) {
+                    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            });
+        }
+
+        function openLightbox(imagePath, title) {
+            document.getElementById('lightbox-image').src = imagePath;
+            document.getElementById('lightbox-caption').textContent = title;
+            document.getElementById('lightbox-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on outside click
+        window.onclick = function (event) {
+            const modal = document.getElementById('lightbox-modal');
+            if (event.target === modal) {
+                closeLightbox();
+            }
+        }
+
+        // Update thumbnails on carousel change
+        $(document).ready(function () {
+            $('#partnerCarousel').on('slid.bs.carousel', function (e) {
+                const index = $(e.relatedTarget).index();
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                const wrapper = document.querySelector('.thumbnail-wrapper');
+
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                    if (i === index && wrapper) {
+                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                });
+            });
+
+            loadPartners();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('lightbox-modal');
+            if (modal.style.display === 'block' && e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/footer.js"></script>
 </body>
+
 </html>

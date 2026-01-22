@@ -1,0 +1,286 @@
+/**
+ * PROPERTY DATA GENERATOR WITH CATEGORIES
+ * ========================================
+ * Run this script to auto-generate properties.js from your folder structure
+ * 
+ * Usage: node generate-properties.js
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const PROJECTS_DIR = './static/images/projects';
+const OUTPUT_FILE = './static/js/properties.js';
+const DEFAULT_LOCATION = "Calamba, Laguna, Philippines"; // Default location with Philippines for better geocoding
+
+/**
+ * Scan all categories and their projects
+ */
+function scanProjects() {
+    const projectsByCategory = {};
+    let totalProjects = 0;
+
+    if (!fs.existsSync(PROJECTS_DIR)) {
+        console.error(`❌ Directory not found: ${PROJECTS_DIR}`);
+        console.log('💡 Make sure you run this from the root of your project');
+        process.exit(1);
+    }
+
+    const categories = fs.readdirSync(PROJECTS_DIR, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => dirent.name)
+        .sort();
+
+    console.log(`🔍 Found ${categories.length} categories: ${categories.join(', ')}\n`);
+
+    categories.forEach(category => {
+        const categoryPath = path.join(PROJECTS_DIR, category);
+        const folders = fs.readdirSync(categoryPath, { withFileTypes: true })
+            .filter(dirent => dirent.isDirectory())
+            .map(dirent => dirent.name);
+
+        console.log(`📁 ${category}: ${folders.length} project(s)`);
+
+        projectsByCategory[category] = {};
+
+        folders.forEach(folder => {
+            const folderPath = path.join(categoryPath, folder);
+
+            // Debug: Show the actual path being checked
+            const propertyJsonPath = path.join(folderPath, 'property.json');
+            console.log(`  📍 Checking: ${propertyJsonPath}`);
+
+            const files = fs.readdirSync(folderPath);
+
+            // Debug: Show all files in the folder
+            console.log(`  📄 Files found: ${files.join(', ')}`);
+
+            // Only include actual image files
+            const images = files.filter(file =>
+                /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
+            ).sort();
+
+            // Try to load property.json if it exists
+            let propertyData = null;
+            if (fs.existsSync(propertyJsonPath)) {
+                try {
+                    const jsonContent = fs.readFileSync(propertyJsonPath, 'utf8');
+                    propertyData = JSON.parse(jsonContent);
+                    console.log(`  ✅ ${folder}: ${images.length} image${images.length !== 1 ? 's' : ''} + property.json LOADED\n`);
+                } catch (err) {
+                    console.log(`  ⚠️  ${folder}: Error reading property.json - ${err.message}`);
+                }
+            } else {
+                console.log(`  ℹ️  ${folder}: property.json NOT FOUND at ${propertyJsonPath}`);
+            }
+
+            // Try to load description.txt if it exists
+            let descriptionText = null;
+            const descriptionPath = path.join(folderPath, 'description.txt');
+            if (fs.existsSync(descriptionPath)) {
+                try {
+                    descriptionText = fs.readFileSync(descriptionPath, 'utf8');
+                    console.log(`  📝 ${folder}: description.txt found`);
+                } catch (err) {
+                    console.log(`  ⚠️  ${folder}: Error reading description.txt - ${err.message}`);
+                }
+            }
+
+            if (!propertyData && !descriptionText) {
+                console.log(`  ✓ ${folder}: ${images.length} image${images.length !== 1 ? 's' : ''} (no metadata)`);
+            }
+
+            projectsByCategory[category][folder] = {
+                name: folder,
+                location: DEFAULT_LOCATION,
+                category: category,
+                folder: folder,
+                images: images,
+                propertyData: propertyData,
+                descriptionText: descriptionText
+            };
+
+            totalProjects++;
+        });
+
+        console.log('');
+    });
+
+    return { projectsByCategory, totalProjects, categories };
+}
+
+/**
+ * Format category name for display
+ */
+function formatCategoryName(category) {
+    return category
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+/**
+ * Generate the properties.js file
+ */
+function generateFile() {
+    console.log('🔨 Generating properties.js...\n');
+
+    const { projectsByCategory, totalProjects, categories } = scanProjects();
+
+    const projectsJson = JSON.stringify(projectsByCategory, null, 8)
+        .replace(/"([^"]+)":/g, '"$1":');
+
+    const categoriesMetadata = categories.map(cat => ({
+        id: cat,
+        name: formatCategoryName(cat)
+    }));
+
+    const fileContent = `/**
+ * AUTO-GENERATED PROPERTY CONFIG WITH CATEGORIES
+ * ==============================================
+ * ⚠️  DO NOT EDIT THIS FILE MANUALLY
+ */
+
+window.PROPERTY_DATA = {
+    basePath: "/static/images/projects/",
+    defaultLocation: "${DEFAULT_LOCATION}",
+    categories: ${JSON.stringify(categoriesMetadata, null, 4)},
+    projectsByCategory: ${projectsJson},
+
+    /**
+     * Get property with full image paths and additional features
+     */
+    async getProperty(category, id) {
+        const project = this.projectsByCategory[category]?.[id];
+        if (!project) return null;
+
+        const images = project.images.map(filename => 
+            this.basePath + category + "/" + project.folder + "/" + filename
+        );
+
+        // Default values
+        let description = null;
+        let location = project.location || this.defaultLocation;
+        let status = null;
+        let price = null;
+        let contact = [];
+        let other = null;
+
+        // Base features for all properties
+        let features = [
+            { icon: "fas fa-building", text: this.getCategoryName(category) },
+            { icon: "fas fa-map-marker-alt", text: location },
+        ];
+
+        // Use preloaded property data if available
+        if (project.propertyData) {
+            const jsonData = project.propertyData;
+
+            // Override location if specified, otherwise use default
+            if (jsonData.location) {
+                location = jsonData.location;
+            } else {
+                location = this.defaultLocation;
+            }
+            
+            const locIndex = features.findIndex(f => f.icon === "fas fa-map-marker-alt");
+            if (locIndex >= 0) features[locIndex].text = location;
+
+            // Override status, price, contact, other
+            if (jsonData.status) status = jsonData.status;
+            if (jsonData.price) price = jsonData.price;
+            if (jsonData.contact) contact = jsonData.contact;
+            if (jsonData.other) other = jsonData.other;
+
+            // Override description if provided
+            if (jsonData.description) description = jsonData.description;
+
+            // Add extra features from property.json
+            if (Array.isArray(jsonData.features)) {
+                features = features.concat(
+                    jsonData.features.map(f => ({
+                        icon: f.icon || "fas fa-info-circle",
+                        text: f.text
+                    }))
+                );
+            }
+
+            // Automatically add status and price as features
+            // if (price) features.push({ icon: "fas fa-money-bill-wave", text: price });
+            // if (status) features.push({ icon: "fas fa-check-circle", text: status });
+        } else if (project.descriptionText) {
+            // Fallback to description.txt if no property.json
+            description = project.descriptionText;
+        }
+
+        // Return the full property object
+        return {
+            id,
+            category,
+            categoryName: this.getCategoryName(category),
+            name: project.name,
+            location,
+            status,
+            price,
+            contact,
+            other,
+            folder: project.folder,
+            images,
+            description,
+            features
+        };
+    },
+
+    async getPropertiesByCategory(category) {
+        const projects = this.projectsByCategory[category] || {};
+        const all = {};
+        for (let id in projects) {
+            all[id] = await this.getProperty(category, id);
+        }
+        return all;
+    },
+
+    async getAllProperties() {
+        const all = {};
+        for (let category in this.projectsByCategory) {
+            all[category] = await this.getPropertiesByCategory(category);
+        }
+        return all;
+    },
+
+    getCategoryName(categoryId) {
+        const category = this.categories.find(cat => cat.id === categoryId);
+        return category ? category.name : categoryId;
+    },
+
+    getTotalProjects() {
+        let count = 0;
+        for (let category in this.projectsByCategory) {
+            count += Object.keys(this.projectsByCategory[category]).length;
+        }
+        return count;
+    }
+};
+
+// Backwards compatibility
+window.PROPERTY_CONFIG = window.PROPERTY_DATA;
+window.PROPERTY_LOADER = window.PROPERTY_DATA;
+`;
+
+    const outputDir = path.dirname(OUTPUT_FILE);
+    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+
+    fs.writeFileSync(OUTPUT_FILE, fileContent);
+
+    console.log(`\n✅ Generated ${OUTPUT_FILE}`);
+    console.log(`📦 Total projects: ${totalProjects}`);
+    console.log(`📂 Categories: ${categories.length}`);
+    console.log(`📍 Default location: ${DEFAULT_LOCATION}`);
+}
+
+try {
+    generateFile();
+} catch (error) {
+    console.error('❌ Error:', error.message);
+    process.exit(1);
+}

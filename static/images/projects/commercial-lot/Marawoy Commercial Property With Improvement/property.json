@@ -1,0 +1,25 @@
+{
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 213 SQM"
+        },
+        {
+            "icon": "fas fa-home",
+            "text": "With Improvement"
+        },
+        {
+            "icon": "fas fa-building",
+            "text": "Residential / Commercial"
+        }
+    ],
+    "description": "• Major Roads\n• Commercial Area\n• Transportation\n• City Center",
+    "location": "Lipa City, Batangas",
+    "price": "₱13,000,000.00",
+    "status": "CLEAN TITLE RESIDENTIAL / COMMERCIAL",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

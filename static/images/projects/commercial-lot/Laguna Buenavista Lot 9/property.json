@@ -1,0 +1,21 @@
+{
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 88 SQM"
+        },
+        {
+            "icon": "fas fa-building",
+            "text": "Residential / Commercial"
+        }
+    ],
+    "description": "• Major Roads\n• Commercial Area\n• Transportation\n• SLEX (Expressway)",
+    "location": "Exec. Barandal, Calamba",
+    "price": "₱13,000.00/sqm",
+    "status": "CLEAN TITLE RESIDENTIAL / COMMERCIAL",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

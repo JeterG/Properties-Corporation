@@ -1,0 +1,94 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: 🔨 Generate properties.js
+        run: |
+          echo "🏠 Generating properties.js..."
+          node generate-properties.js
+          echo "✅ Properties generated"
+      
+      - name: 🤝 Generate partners.js
+        run: |
+          echo "🤝 Generating partners.js..."
+          node generate-partners.js
+          echo "✅ Partners generated"
+      
+      - name: 🔄 Update cache-busting versions
+        run: |
+          echo "🔄 Updating HTML version numbers..."
+          node update-versions.js
+          echo "✅ Versions updated"
+      
+      - name: ⚙️ Setup Pages
+        uses: actions/configure-pages@v5
+      
+      - name: 📦 Upload artifact (including generated files)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      - name: 🔍 Check if generated files changed
+        id: check_changes
+        run: |
+          if git diff --quiet static/js/properties.js static/js/partners.js partners projects property; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No changes to generated files"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "📝 Generated files have changes"
+          fi
+      
+      - name: 📤 Commit generated files to repo
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "jeterg"
+          git config user.email "jeterg@users.noreply.github.com"
+          git add static/js/properties.js static/js/partners.js partners.html projects.html property.html
+          git commit -m "🤖 Update generated data files and cache versions"
+          git push
+          echo "✅ Generated files committed to repo"
+      
+      - name: ✅ Complete
+        run: |
+          echo "=================================="
+          echo "✅ Build and Deploy Complete!"
+          echo "=================================="
+          echo "📊 Generated files: ${{ steps.check_changes.outputs.has_changes == 'true' && 'Updated & committed' || 'No changes' }}"
+          echo "🌐 Deployed to: ${{ steps.deployment.outputs.page_url }}"
+          echo "=================================="

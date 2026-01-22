@@ -1,0 +1,53 @@
+{
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 45 SQM"
+        },
+        {
+            "icon": "fas fa-ruler-combined",
+            "text": "Floor Area: 80 SQM"
+        },
+        {
+            "icon": "fas fa-bed",
+            "text": "2 Bedrooms"
+        },
+        {
+            "icon": "fas fa-hot-tub",
+            "text": "1 Comfort Room"
+        },
+        {
+            "icon": "fas fa-utensils",
+            "text": "Kitchen Area"
+        },
+        {
+            "icon": "fas fa-broom",
+            "text": "Service Area"
+        },
+        {
+            "icon": "fas fa-couch",
+            "text": "Living Area"
+        },
+        {
+            "icon": "fas fa-utensils",
+            "text": "Dining Area"
+        },
+        {
+            "icon": "fas fa-home",
+            "text": "Balcony"
+        },
+        {
+            "icon": "fas fa-car",
+            "text": "Car Port"
+        }
+    ],
+    "description": "• School\n• Public Market\n• Commercial Area\n• Transportation\n• Mall\n• Industrial Park\n• Church\n• SLEX (Expressway)",
+    "location": "Brgy. Barandal, Calamba City",
+    "price": "₱3,584,000.00",
+    "status": "COMPLETE FINISHED",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "features": [
+        {
+            "icon": "fas fa-ruler-combined",
+            "text": "Floor Area: 27 SQM"
+        },
+        {
+            "icon": "fas fa-bed",
+            "text": "Proposed 1 Bedroom"
+        },
+        {
+            "icon": "fas fa-hot-tub",
+            "text": "1 Comfort Room"
+        },
+        {
+            "icon": "fas fa-utensils",
+            "text": "Kitchen Area"
+        }
+    ],
+    "description": "• School\n• Market\n• Commercial Area\n• Transportation\n• Mall (SM Sto. Tomas)\n• Industrial Park\n• Church\n• SLEX (Expressway)",
+    "location": "Sto. Tomas, Batangas",
+    "price": "₱5,400,000.00",
+    "status": "CLEAN CCT COMPLETE (Turn over December)",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.calambaexpressive.com/sitemap.xml
+
+# Optional: Block specific directories if needed
+# Disallow: /static/temp/
+# Disallow: /admin/

@@ -1,0 +1,21 @@
+{
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 100 SQM"
+        },
+        {
+            "icon": "fas fa-home",
+            "text": "David Roy Model House Design Available"
+        }
+    ],
+    "description": "• School\n• Public Market\n• Commercial Area\n• Transportation\n• Mall\n• Industrial Park\n• Church\n• SLEX (Expressway)",
+    "location": "Madison South Batino, Calamba",
+    "price": "₱2,000,000.00",
+    "status": "LOT ONLY / DAVID ROY MODEL HOUSE",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

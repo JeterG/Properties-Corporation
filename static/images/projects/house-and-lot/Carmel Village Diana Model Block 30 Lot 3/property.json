@@ -1,0 +1,56 @@
+{
+    "propertyName": "Carmel Village Diana Model",
+    "vicinity": "CALAMBA",
+    "address": "BLOCK 30 LOT 3 CARMEL VILLAGE PH2 BARANDAL CALAMBA",
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 80 SQM"
+        },
+        {
+            "icon": "fas fa-ruler-combined",
+            "text": "Floor Area: 120 SQM (Estimate)"
+        },
+        {
+            "icon": "fas fa-bed",
+            "text": "2 Bedrooms"
+        },
+        {
+            "icon": "fas fa-hot-tub",
+            "text": "1 Comfort Room"
+        },
+        {
+            "icon": "fas fa-utensils",
+            "text": "Kitchen Area"
+        },
+        {
+            "icon": "fas fa-broom",
+            "text": "Service Area"
+        },
+        {
+            "icon": "fas fa-couch",
+            "text": "Living Area"
+        },
+        {
+            "icon": "fas fa-utensils",
+            "text": "Dining Area"
+        },
+        {
+            "icon": "fas fa-car",
+            "text": "Car Port"
+        },
+        {
+            "icon": "fas fa-couch",
+            "text": "With Improvement and Furnitures & Fixtures"
+        }
+    ],
+    "description": "• School\n• Public Market\n• Commercial Area\n• Transportation\n• Mall\n• Industrial Park\n• Church\n• SLEX (Expressway)",
+    "location": "Barandal, Calamba",
+    "price": "₱5,500,000.00",
+    "status": "COMPLETE FINISHED WITH IMPROVEMENT AND FURNITURES & FIXTURES",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

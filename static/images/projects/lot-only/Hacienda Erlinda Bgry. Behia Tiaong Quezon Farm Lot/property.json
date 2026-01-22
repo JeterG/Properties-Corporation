@@ -1,0 +1,24 @@
+{
+    "propertyName": "Hacienda Erlinda Bgry. Behia Tiaong Quezon",
+    "vicinity": "QUEZON PROVINCE",
+    "address": "HACIENDA ERLINDA BGRY. BEHIA TIAONG QUEZON",
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: Est. 1 Hectare"
+        },
+        {
+            "icon": "fas fa-tractor",
+            "text": "Farm Lot"
+        }
+    ],
+    "description": "• Hacienda Property\n• With Improvements\n• Clean Title",
+    "location": "Tiaong, Quezon Province",
+    "price": "Contact for pricing",
+    "status": "CLEAN TITLE WITH IMPROVEMENT",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

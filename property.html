@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c8102e">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View detailed property information">
+    <title>Property Details - Calamba Expressive Properties</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/modern-styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/icon.jpg" type="image/x-icon">
+
+    <style>
+        /* LAYOUT IMPROVEMENTS */
+        .property-container {
+            padding: 40px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #c8102e;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.25rem;
+        }
+
+        /* Price Card - Compact version */
+        .price-highlight {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            line-height: 1.2;
+        }
+
+        .price-status {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        /* Property Header */
+        .property-header {
+            margin-bottom: 30px;
+        }
+
+        .property-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2a2a33;
+            margin-bottom: 15px;
+        }
+
+        .property-location {
+            font-size: 1.2rem;
+            color: #69707f;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .property-category {
+            display: inline-block;
+            background: #c8102e;
+            background-image: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            color: #c8102e;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+            background-image: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-button:hover {
+            color: #a00d25;
+            text-decoration: none;
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        /* Gallery - IMPROVED: Better spacing */
+        .property-gallery {
+            margin-bottom: 2rem;
+        }
+
+        .carousel-inner {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Scrollable Thumbnail Container */
+        .thumbnail-container {
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .thumbnail-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #a77846 #f0f0f0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            border-radius: 4px;
+        }
+
+        .thumbnail-wrapper::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+        }
+
+        .thumbnail-grid {
+            display: flex;
+            gap: 0.75rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .thumbnail {
+            min-width: 120px;
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 3px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Active thumbnail border with gradient */
+        .thumbnail.active {
+            border: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #c8102e 0%, #a77846 100%) border-box;
+            box-shadow: 0 0 8px rgba(200, 16, 46, 0.3);
+        }
+
+        /* Scroll Buttons */
+        .thumbnail-scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .thumbnail-scroll-btn:hover {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.5);
+        }
+
+        .thumbnail-scroll-btn.left {
+            left: 0;
+        }
+
+        .thumbnail-scroll-btn.right {
+            right: 0;
+        }
+
+        .thumbnail-scroll-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .section-card h3 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-card h3 i {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-card h3 span {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        /* Features Grid - IMPROVED: Better for sidebar */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: #fff5f7;
+            transform: translateX(4px);
+        }
+
+        .feature-item i {
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 24px;
+        }
+
+        .feature-item span {
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* Description */
+        .description-text {
+            color: #666;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-size: 1.05rem;
+        }
+
+        /* Map Container */
+        #property-map {
+            height: 400px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            z-index: 1;
+            position: relative;
+        }
+
+        .leaflet-control-container {
+            z-index: 500 !important;
+        }
+
+        .leaflet-pane {
+            z-index: 400 !important;
+        }
+
+        .map-loading {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            border-radius: 12px;
+            color: #666;
+        }
+
+        /* Contact Section - IMPROVED: Grid layout */
+        .contact-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-section h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-section h3 i {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-section h3 span {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20bd5a;
+            color: white;
+        }
+
+        .btn-messenger {
+            background: #0084FF;
+            color: white;
+        }
+
+        .btn-messenger:hover {
+            background: #0073e6;
+            color: white;
+        }
+
+        .btn-email {
+            background: #a77846;
+            color: white;
+        }
+
+        .btn-email:hover {
+            background: #8a5f38;
+            color: white;
+        }
+
+        .btn-phone {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            color: white;
+        }
+
+        .btn-phone:hover {
+            box-shadow: 0 8px 20px rgba(200, 16, 46, 0.4);
+            color: white;
+        }
+
+        .btn-inquiry {
+            background: #2a2a33;
+            color: white;
+        }
+
+        .btn-inquiry:hover {
+            background: #1a1a20;
+            color: white;
+        }
+
+        /* Share Section - IMPROVED: Inline with icons */
+        .share-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+        }
+
+        .share-section h4 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .share-section h4 i {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .share-section h4 span {
+            background: linear-gradient(135deg, #c8102e 0%, #a77846 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+
+        .share-facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .share-twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+
+        .share-copy {
+            background: #666;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           SKELETON LOADING STYLES
+           ============================================ */
+
+
+
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .skeleton-back-btn {
+            width: 150px;
+            height: 20px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-category-badge {
+            width: 100px;
+            height: 32px;
+            margin-bottom: 15px;
+            border-radius: 20px;
+        }
+
+        .skeleton-location {
+            height: 28px;
+            margin-bottom: 30px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skeleton-price-card {
+            background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-price-label {
+            height: 14px;
+            width: 100px;
+            margin: 0 auto 10px;
+        }
+
+        .skeleton-price-amount {
+            height: 40px;
+            width: 250px;
+            margin: 0 auto 10px;
+        }
+
+        .skeleton-price-status {
+            height: 28px;
+            width: 180px;
+            margin: 0 auto;
+            border-radius: 20px;
+        }
+
+        .skeleton-carousel {
+            height: 500px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .skeleton-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-thumbnail {
+            height: 100px;
+            border-radius: 8px;
+        }
+
+        .skeleton-section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-section-title {
+            height: 32px;
+            width: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .skeleton-text-line {
+            height: 20px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-text-line.short {
+            width: 70%;
+        }
+
+        .skeleton-feature {
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .skeleton-contact-btn {
+            height: 56px;
+            border-radius: 8px;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .error-message i {
+            font-size: 4rem;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .leaflet-control-recenter {
+            background: white;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 500;
+        }
+
+        .leaflet-control-recenter:hover {
+            background: #c8102e;
+            border-color: #c8102e;
+        }
+
+        .leaflet-control-recenter:hover i {
+            color: white;
+        }
+
+        .leaflet-control-recenter i {
+            font-size: 18px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .leaflet-control-recenter:active {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            transform: scale(0.95);
+        }
+
+        .leaflet-control-recenter::before {
+            content: attr(title);
+            position: absolute;
+            right: 45px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .leaflet-control-recenter:hover::before {
+            opacity: 1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .property-title {
+                font-size: 2rem;
+            }
+
+            .carousel-item img {
+                height: 300px;
+            }
+
+            .skeleton-carousel {
+                height: 300px;
+            }
+
+            .thumbnail {
+                min-width: 80px;
+                width: 80px;
+                height: 70px;
+            }
+
+            .skeleton-thumbnails {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+
+            .price-amount {
+                font-size: 1.75rem;
+            }
+
+            #property-map {
+                height: 300px;
+            }
+
+            .share-buttons {
+                flex-direction: column;
+            }
+
+            .share-btn {
+                min-width: 100%;
+            }
+
+            .leaflet-control-recenter {
+                width: 40px;
+                height: 40px;
+            }
+
+            .leaflet-control-recenter i {
+                font-size: 20px;
+            }
+
+            .leaflet-control-recenter::before {
+                display: none;
+            }
+
+            .price-highlight {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .price-label {
+                font-size: 0.7rem;
+            }
+
+            .price-status {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .skeleton-location {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container property-container">
+            <!-- Skeleton Loading -->
+            <div id="skeleton-content">
+                <div class="skeleton skeleton-back-btn"></div>
+
+                <div class="property-header">
+                    <div class="skeleton skeleton-category-badge"></div>
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-location"></div>
+                </div>
+
+                <div class="skeleton-price-card">
+                    <div class="skeleton skeleton-price-label"></div>
+                    <div class="skeleton skeleton-price-amount"></div>
+                    <div class="skeleton skeleton-price-status"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="skeleton skeleton-carousel"></div>
+                        <div class="skeleton-thumbnails">
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                            <div class="skeleton skeleton-thumbnail"></div>
+                        </div>
+
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-section-title"></div>
+                            <div class="skeleton skeleton-text-line"></div>
+                            <div class="skeleton skeleton-text-line"></div>
+                            <div class="skeleton skeleton-text-line short"></div>
+                        </div>
+
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-section-title"></div>
+                            <div class="skeleton" style="height: 400px; border-radius: 12px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-section-title"></div>
+                            <div class="skeleton skeleton-feature"></div>
+                            <div class="skeleton skeleton-feature"></div>
+                            <div class="skeleton skeleton-feature"></div>
+                            <div class="skeleton skeleton-feature"></div>
+                        </div>
+
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-section-title"></div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <div class="skeleton skeleton-text-line"></div>
+                            </div>
+                            <div style="display: grid; gap: 1rem;">
+                                <div class="skeleton skeleton-contact-btn"></div>
+                                <div class="skeleton skeleton-contact-btn"></div>
+                                <div class="skeleton skeleton-contact-btn"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton-section-card">
+                            <div class="skeleton skeleton-section-title"></div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <div class="skeleton skeleton-text-line"></div>
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div class="skeleton skeleton-contact-btn" style="width: calc(50% - 0.5rem);"></div>
+                                <div class="skeleton skeleton-contact-btn" style="width: calc(50% - 0.5rem);"></div>
+                                <div class="skeleton skeleton-contact-btn" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual Property Content -->
+            <div id="property-content" style="display: none;">
+                <a href="#" class="back-button" onclick="goBackToProjects(event)">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+
+                <!-- Property Header -->
+                <div class="property-header">
+                    <div class="property-category" id="property-category"></div>
+                    <h1 class="section-title" id="property-title">Property Name</h1>
+                    <div class="property-location" id="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Location
+                    </div>
+                </div>
+
+                <!-- Price Highlight at Top -->
+                <div class="price-highlight" id="price-section" style="display: none;">
+                    <div class="price-label">Asking Price</div>
+                    <div class="price-amount" id="property-price">₱5,500,000.00</div>
+                    <div class="price-status" id="property-status">CLEAN CCT COMPLETE</div>
+                </div>
+
+                <div class="row">
+                    <!-- Left Column: Gallery, Description, Map -->
+                    <div class="col-lg-8 mb-4">
+                        <!-- Gallery -->
+                        <div class="property-gallery">
+                            <!-- Carousel injected by JavaScript -->
+                        </div>
+
+                        <!-- Description -->
+                        <div id="description-section" style="display: none;">
+                            <div class="section-card">
+                                <h3>
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Property Description</span>
+                                </h3>
+                                <div class="description-text" id="property-description"></div>
+                            </div>
+                        </div>
+
+                        <!-- Map Section -->
+                        <div class="section-card">
+                            <h3>
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span>Property Location</span>
+                            </h3>
+                            <div id="map-container">
+                                <div class="map-loading">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #c8102e;"></i>
+                                    <span style="margin-left: 10px;">Loading map...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Features, Contact & Share -->
+                    <div class="col-lg-4">
+                        <!-- Property Features Section -->
+                        <div class="section-card">
+                            <h3>
+                                <i class="fas fa-list"></i>
+                                <span>Property Features</span>
+                            </h3>
+                            <div class="features-grid" id="features-grid">
+                                <!-- Features populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Contact Section -->
+                        <div class="contact-section">
+                            <h3>
+                                <i class="fas fa-phone"></i>
+                                <span>Contact Agent</span>
+                            </h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; text-align: center;">
+                                Interested in this property? Get in touch with us today!
+                            </p>
+
+                            <div class="contact-grid">
+                                <a href="#" id="whatsapp-link" target="_blank" class="contact-btn btn-whatsapp">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </a>
+
+                                <a href="#" id="messenger-link" target="_blank" class="contact-btn btn-messenger">
+                                    <i class="fab fa-facebook-messenger"></i>
+                                    Messenger
+                                </a>
+
+                                <a href="#" id="email-link" class="contact-btn btn-email">
+                                    <i class="fas fa-envelope"></i>
+                                    Email
+                                </a>
+
+                                <a href="tel:+639770549679" class="contact-btn btn-phone">
+                                    <i class="fas fa-phone"></i>
+                                    0977-054-9679
+                                </a>
+
+                                <a href="tel:+639276154651" class="contact-btn btn-phone">
+                                    <i class="fas fa-phone"></i>
+                                    0927-615-4651
+                                </a>
+
+                                <button onclick="openInquiryForm()" class="contact-btn btn-inquiry">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    Submit Inquiry
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Share Section -->
+                        <div class="share-section">
+                            <h4>
+                                <i class="fas fa-share-alt"></i>
+                                <span>Share Property</span>
+                            </h4>
+                            <div class="share-buttons">
+                                <a href="#" id="share-facebook" target="_blank" class="share-btn share-facebook">
+                                    <i class="fab fa-facebook"></i>
+                                    Facebook
+                                </a>
+                                <a href="#" id="share-twitter" target="_blank" class="share-btn share-twitter">
+                                    <i class="fab fa-twitter"></i>
+                                    Twitter
+                                </a>
+                                <button onclick="copyLink()" class="share-btn share-copy" id="copy-btn">
+                                    <i class="fas fa-link"></i>
+                                    Copy Link
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <h3>Property Not Found</h3>
+                <p>The property you're looking for doesn't exist or has been removed.</p>
+                <a href="/projects" class="contact-btn btn-phone" style="margin-top: 20px; display: inline-flex;">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/static/js/enhanced-modal.js"></script>
+    <script src="/static/js/properties.js?v=1765739795994"></script>
+
+    <script>
+        let propertyMap = null;
+        let currentProperty = null;
+
+        function getWhatsAppLink(property) {
+            const message = `Hello! I'm interested in learning more about *${property.name}*.\n\nLocation: ${property.location}\n\nCould you please provide more details about this property?`;
+            const phoneNumber = '639276154651';
+            return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        }
+
+        function getMessengerLink(property) {
+            const pageId = '103618938300166';
+            const message = `Hello! I'm interested in learning more about ${property.name}. Location: ${property.location}. Could you please provide more details?`;
+            return `https://m.me/${pageId}?text=${encodeURIComponent(message)}`;
+        }
+
+        function getEmailLink(property) {
+            const subject = `Inquiry about ${property.name}`;
+            const body = `Hello,\n\nI'm interested in learning more about the following property:\n\nProperty: ${property.name}\nLocation: ${property.location}\n${property.price ? `Price: ${property.price}\n` : ''}${property.status ? `Status: ${property.status}\n` : ''}\nProperty URL: ${window.location.href}\n\nCould you please provide more details?\n\nThank you!`;
+            return `mailto:cepc.development@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // NEW: Function to go back to projects with category preserved
+        function goBackToProjects(event) {
+            event.preventDefault();
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+
+            if (category) {
+                window.location.href = `/projects?category=${category}`;
+            } else {
+                window.location.href = '/projects';
+            }
+        }
+
+        async function initializeMap(address, propertyName) {
+            const mapContainer = document.getElementById('map-container');
+
+            try {
+                const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`;
+
+                const response = await fetch(geocodeUrl, {
+                    headers: { 'User-Agent': 'CalambaExpressiveProperties/1.0' }
+                });
+
+                const data = await response.json();
+                let lat, lon;
+
+                if (data && data.length > 0) {
+                    lat = parseFloat(data[0].lat);
+                    lon = parseFloat(data[0].lon);
+                } else {
+                    lat = 14.2117;
+                    lon = 121.1653;
+                }
+
+                window.propertyCoordinates = { lat, lon };
+
+                mapContainer.innerHTML = '<div id="property-map"></div>';
+                propertyMap = L.map('property-map').setView([lat, lon], 15);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 19
+                }).addTo(propertyMap);
+
+                const customIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: '<i class="fas fa-map-marker-alt" style="font-size: 40px; background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>',
+                    iconSize: [40, 40],
+                    iconAnchor: [20, 40],
+                    popupAnchor: [0, -40]
+                });
+
+                const marker = L.marker([lat, lon], { icon: customIcon }).addTo(propertyMap);
+
+                marker.bindPopup(`
+                <div style="min-width: 200px;">
+                    <div style="font-weight: 700; color: transparent; background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 5px;">${propertyName}</div>
+                    <div style="color: #666; font-size: 13px;">
+                        <i class="fas fa-map-marker-alt gradient-icon"></i> ${address}
+                    </div>
+                </div>
+            `).openPopup();
+
+                addRecenterControl(propertyMap, lat, lon);
+
+            } catch (error) {
+                console.error('Error initializing map:', error);
+                mapContainer.innerHTML = `
+                <div class="map-loading" style="background: #ffe6e6; color: #c8102e;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span style="margin-left: 10px;">Unable to load map.</span>
+                </div>
+            `;
+            }
+        }
+
+        function addRecenterControl(map, lat, lon) {
+            L.Control.Recenter = L.Control.extend({
+                onAdd: function (map) {
+                    const btn = L.DomUtil.create('div', 'leaflet-control-recenter');
+                    btn.innerHTML = '<i class="fas fa-crosshairs"></i>';
+                    btn.title = 'Return to Property Location';
+
+                    btn.onclick = function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        map.setView([lat, lon], 15, {
+                            animate: true,
+                            duration: 0.5
+                        });
+                    };
+
+                    L.DomEvent.disableClickPropagation(btn);
+                    L.DomEvent.disableScrollPropagation(btn);
+
+                    return btn;
+                },
+
+                onRemove: function (map) { }
+            });
+
+            L.control.recenter = function (opts) {
+                return new L.Control.Recenter(opts);
+            }
+
+            L.control.recenter({ position: 'bottomright' }).addTo(map);
+        }
+
+        function updateButtonStates() {
+            const leftBtn = document.querySelector('.thumbnail-scroll-btn.left');
+            const rightBtn = document.querySelector('.thumbnail-scroll-btn.right');
+            if (leftBtn) leftBtn.disabled = false;
+            if (rightBtn) rightBtn.disabled = false;
+        }
+
+        function initPropertyThumbnailScroll() {
+            const leftBtn = document.querySelector('.thumbnail-scroll-btn.left');
+            const rightBtn = document.querySelector('.thumbnail-scroll-btn.right');
+
+            if (!leftBtn || !rightBtn) return;
+
+            const totalSlides = document.querySelectorAll('.thumbnail').length;
+            let currentIndex = 0;
+
+            leftBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                changeSlide(currentIndex);
+            });
+
+            rightBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                changeSlide(currentIndex);
+            });
+
+            $('#propertyCarousel').on('slid.bs.carousel', function (e) {
+                currentIndex = $(e.relatedTarget).index();
+            });
+
+            updateButtonStates();
+        }
+
+        async function loadProperty() {
+            const skeletonContent = document.getElementById('skeleton-content');
+            const content = document.getElementById('property-content');
+            const errorMessage = document.getElementById('error-message');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            const id = urlParams.get('id');
+
+            if (!category || !id) {
+                skeletonContent.style.display = 'none';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            try {
+                const property = await window.PROPERTY_DATA.getProperty(category, id);
+
+                if (!property) throw new Error('Property not found');
+
+                currentProperty = property;
+
+                document.title = `${property.name} - Calamba Expressive Properties`;
+
+                setTimeout(() => {
+                    skeletonContent.style.display = 'none';
+                    content.style.display = 'block';
+
+                    const carouselHTML = `
+                    <div id="propertyCarousel" class="carousel slide mb-3" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            ${property.images.map((img, i) => `
+                                <li data-target="#propertyCarousel" data-slide-to="${i}" class="${i === 0 ? 'active' : ''}"></li>
+                            `).join('')}
+                        </ol>
+                        <div class="carousel-inner">
+                            ${property.images.map((img, i) => `
+                                <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                    <img src="${img}" class="d-block w-100" alt="${property.name} - Image ${i + 1}" 
+                                         onclick="openFullscreen(this)">
+                                </div>
+                            `).join('')}
+                        </div>
+                        <a class="carousel-control-prev" href="#propertyCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#propertyCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <div class="thumbnail-container">
+                        <button class="thumbnail-scroll-btn left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="thumbnail-wrapper">
+                            <div class="thumbnail-grid" id="property-thumbnail-grid">
+                                ${property.images.map((img, i) => `
+                                    <img src="${img}" class="thumbnail ${i === 0 ? 'active' : ''}" 
+                                         alt="Thumbnail ${i + 1}" onclick="changeSlide(${i})" data-index="${i}">
+                                `).join('')}
+                            </div>
+                        </div>
+                        <button class="thumbnail-scroll-btn right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                `;
+
+                    document.querySelector('.property-gallery').innerHTML = carouselHTML;
+                    setTimeout(() => initPropertyThumbnailScroll(), 100);
+
+                    document.getElementById('property-category').textContent = property.categoryName;
+                    document.getElementById('property-title').textContent = property.name;
+                    document.getElementById('property-location').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${property.location}`;
+
+                    if (property.price || property.status) {
+                        const priceSection = document.getElementById('price-section');
+                        priceSection.style.display = 'block';
+                        if (property.price) {
+                            document.getElementById('property-price').textContent = property.price;
+                        }
+                        if (property.status) {
+                            document.getElementById('property-status').textContent = property.status;
+                        }
+                    }
+
+                    const featuresGrid = document.getElementById('features-grid');
+                    property.features.forEach(feature => {
+                        const featureItem = document.createElement('div');
+                        featureItem.className = 'feature-item';
+                        featureItem.innerHTML = `
+                        <i class="${feature.icon}"></i>
+                        <span>${feature.text}</span>
+                    `;
+                        featuresGrid.appendChild(featureItem);
+                    });
+
+                    if (property.description) {
+                        document.getElementById('description-section').style.display = 'block';
+                        const descElement = document.getElementById('property-description');
+                        const hasHTMLTags = /<[^>]+>/.test(property.description);
+                        if (hasHTMLTags) {
+                            descElement.innerHTML = property.description;
+                        } else {
+                            descElement.textContent = property.description;
+                        }
+                    }
+
+                    document.getElementById('whatsapp-link').href = getWhatsAppLink(property);
+                    document.getElementById('messenger-link').href = getMessengerLink(property);
+                    document.getElementById('email-link').href = getEmailLink(property);
+
+                    const propertyUrl = encodeURIComponent(window.location.href);
+                    const propertyName = encodeURIComponent(property.name);
+                    document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${propertyUrl}`;
+                    document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${propertyUrl}&text=${propertyName}`;
+
+                    setTimeout(() => {
+                        initializeMap(property.location, property.name);
+                    }, 300);
+
+                }, 1000);
+
+            } catch (error) {
+                console.error('Error loading property:', error);
+                skeletonContent.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function changeSlide(index) {
+            $('#propertyCarousel').carousel(index);
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const wrapper = document.querySelector('.thumbnail-wrapper');
+
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+                if (i === index && wrapper) {
+                    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            });
+        }
+
+        function openFullscreen(img) {
+            if (window.createImageModal) {
+                window.createImageModal(img.src);
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btn = document.getElementById('copy-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+
+        function openInquiryForm() {
+            const propertyName = document.getElementById('property-title').textContent;
+            const propertyLocation = document.getElementById('property-location').textContent.replace(/📍|<i[^>]*>.*?<\/i>/g, '').trim();
+            const propertyCategory = document.getElementById('property-category').textContent;
+            const propertyUrl = window.location.href;
+
+            const formBaseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdW4qEGG5YwfKj3twGaxF41T5xg0Me5WY3G6b147UL4ujrOsg/viewform';
+
+            const params = new URLSearchParams({
+                'entry.384175351': propertyName,
+                'entry.1764803982': propertyLocation,
+                'entry.142418475': propertyCategory,
+                'entry.19700063': propertyUrl
+            });
+
+            window.open(`${formBaseUrl}?${params.toString()}`, '_blank');
+        }
+
+        $(document).ready(function () {
+            $('#propertyCarousel').on('slid.bs.carousel', function (e) {
+                const index = $(e.relatedTarget).index();
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                const wrapper = document.querySelector('.thumbnail-wrapper');
+
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                    if (i === index && wrapper) {
+                        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', loadProperty);
+    </script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/footer.js"></script>
+</body>
+
+</html>

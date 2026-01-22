@@ -1,0 +1,24 @@
+{
+    "propertyName": "Bucal Bypass Road Calamba City",
+    "vicinity": "CALAMBA",
+    "address": "BUCAL BYPASS ROAD CALAMBA CITY",
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 1.7 Hectares"
+        },
+        {
+            "icon": "fas fa-tractor",
+            "text": "Farm Lot"
+        }
+    ],
+    "description": "• Bypass Road\n• Major Highway\n• Transportation",
+    "location": "Calamba City",
+    "price": "Contact for pricing",
+    "status": "TITLE ON PROCESS",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

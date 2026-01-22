@@ -1,194 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c8102e">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Team - Calamba Expressive Properties</title>
-    <!-- Include Bootstrap CSS -->
+    <meta name="description"
+        content="Meet the leadership team at Calamba Expressive Properties Corporation. Experienced professionals dedicated to excellence in real estate service in Calamba, Laguna.">
+    <meta name="keywords"
+        content="real estate team Calamba, property experts Laguna, real estate professionals Philippines, Calamba realtors">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.calambaexpressive.com/team">
+    <meta property="og:title" content="Our Team - Calamba Expressive Properties">
+    <meta property="og:description"
+        content="Meet our experienced leadership team committed to excellence in real estate.">
+    <meta property="og:image" content="https://www.calambaexpressive.com/static/images/icon.jpg">
+
+    <title>Our Team - Real Estate Experts | Calamba Expressive Properties</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/P/static/css/styles.css">
-    <link rel="stylesheet" href="/P/static/css/modal.css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/modern-styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/icon.jpg" type="image/x-icon">
+
     <style>
-        /* Main layout styling to make footer stick to the bottom */
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
+        /* Skeleton Loading Styles */
+        .skeleton {
+            background: #e0e0e0;
+            background-image: linear-gradient(90deg, #e0e0e0 0px, #f0f0f0 40px, #e0e0e0 80px);
+            background-size: 400px 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+            border-radius: 8px;
         }
 
-        main {
-            flex: 1; /* This will make the main content area expand to fill available space */
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
         }
 
-        .navbar-custom {
-            background-color: #c8102e !important; /* Navbar background color */
+        .skeleton-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
-            color: #f3ef11 !important; /* Navbar text color */
+        .skeleton-team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        /* Footer styling */
-        footer {
-            background-color: #c8102e; /* Footer background color */
-            color: #f3ef11; /* Footer text color */
-            padding: 20px 0;
-            width: 100%;
-            position: relative;
-            bottom: 0;
+        .skeleton-team-member {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .skeleton-team-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .skeleton-team-name {
+            height: 28px;
+            width: 180px;
+            margin: 0 auto 0.5rem;
+        }
+
+        .skeleton-team-role {
+            height: 20px;
+            width: 140px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-team-desc {
+            height: 16px;
+            margin-bottom: 0.5rem;
+        }
+
+        .skeleton-team-desc:last-child {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skeleton-values-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-values-title {
+            height: 40px;
+            width: 250px;
+            margin: 0 auto 2rem;
+        }
+
+        .skeleton-value-item {
+            text-align: center;
+        }
+
+        .skeleton-value-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-value-title {
+            height: 24px;
+            width: 120px;
+            margin: 0 auto 0.5rem;
+        }
+
+        .skeleton-value-desc {
+            height: 16px;
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        .skeleton-cta-section {
+            background: #e0e0e0;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .skeleton-cta-title {
+            height: 36px;
+            width: 300px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-cta-text {
+            height: 20px;
+            width: 400px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .skeleton-cta-button {
+            height: 50px;
+            width: 200px;
+            margin: 0 auto;
+            border-radius: 25px;
+        }
+
+        @media (max-width: 768px) {
+
+            .skeleton-subtitle,
+            .skeleton-cta-text {
+                width: 90%;
+            }
+
+            .skeleton-team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .skeleton-hero-card {
+            height: 250px;
+            border-radius: 12px;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .skeleton-section-title {
+            height: 40px;
+            width: 300px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-section-subtitle {
+            height: 20px;
+            width: 400px;
+            margin: 0 auto;
         }
     </style>
-
-    <link rel="icon" href="/P/static/images/icon.jpg" type="image/x-icon">
-
-    
-<style>
-    /* Center the text and images */
-    .center-text {
-        text-align: center;
-        padding: 20px;
-    }
-
-    .team-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px; /* Space between team members */
-    }
-
-    .team-member {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        max-width: 300px;
-        width: 100%;
-    }
-
-    .image-container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .team-img {
-        width: 100%;
-        max-width: 200px; /* Adjust image size */
-        height: auto;
-        border-radius: 50%; /* Make image circular */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    @media (max-width: 768px) {
-        .team-section {
-            padding: 10px;
-        }
-        .team-member {
-            max-width: 80%;
-        }
-    }
-</style>
-
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/P/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/projects.html">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/team.html">Our Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/achievements.html">Achievements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/partners.html">Partners</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/contact.html">Contact Us</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Excellence in Real Estate
-                </span>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
+
     <main>
-        
-<section class="center-text team-section">
-    <h2>Meet Our Team</h2>
+        <div class="container mt-5 mb-5">
+            <!-- Skeleton Loading -->
+            <div id="skeleton-content">
+                <div class="skeleton-header">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-subtitle"></div>
+                </div>
 
-    <!-- Team Member 1 -->
-    <div class="team-member">
-        <div class="image-container">
-            <img src="/P/static/images/team/erlinda_manguiat.jpg" alt="Erlinda Manguiat" class="team-img">
+                <!-- Skeleton Team Grid -->
+                <div class="skeleton-team-grid">
+                    <div class="skeleton-team-member">
+                        <div class="skeleton skeleton-team-img"></div>
+                        <div class="skeleton skeleton-team-name"></div>
+                        <div class="skeleton skeleton-team-role"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                    </div>
+                    <div class="skeleton-team-member">
+                        <div class="skeleton skeleton-team-img"></div>
+                        <div class="skeleton skeleton-team-name"></div>
+                        <div class="skeleton skeleton-team-role"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                    </div>
+                    <div class="skeleton-team-member">
+                        <div class="skeleton skeleton-team-img"></div>
+                        <div class="skeleton skeleton-team-name"></div>
+                        <div class="skeleton skeleton-team-role"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                    </div>
+                    <div class="skeleton-team-member">
+                        <div class="skeleton skeleton-team-img"></div>
+                        <div class="skeleton skeleton-team-name"></div>
+                        <div class="skeleton skeleton-team-role"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                        <div class="skeleton skeleton-team-desc"></div>
+                    </div>
+                </div>
+
+                <!-- Skeleton Values Section -->
+                <div class="row">
+                    <div class="col-lg-12 mx-auto">
+                        <div class="skeleton-values-section">
+                            <div class="skeleton skeleton-values-title"></div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="skeleton-value-item">
+                                        <div class="skeleton skeleton-value-icon"></div>
+                                        <div class="skeleton skeleton-value-title"></div>
+                                        <div class="skeleton skeleton-value-desc"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="skeleton-value-item">
+                                        <div class="skeleton skeleton-value-icon"></div>
+                                        <div class="skeleton skeleton-value-title"></div>
+                                        <div class="skeleton skeleton-value-desc"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="skeleton-value-item">
+                                        <div class="skeleton skeleton-value-icon"></div>
+                                        <div class="skeleton skeleton-value-title"></div>
+                                        <div class="skeleton skeleton-value-desc"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skeleton CTA Section -->
+                <section class="container mt-5">
+                    <div class="row">
+                        <div class="col-12 mx-auto">
+                            <div class="skeleton-hero-card">
+                                <div class="skeleton skeleton-section-title"></div>
+                                <div class="skeleton skeleton-section-subtitle"></div>
+                                <div class="skeleton-buttons"
+                                    style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Actual Content -->
+            <div id="team-content" style="display: none;">
+                <h1 class="section-title" style="color: transparent !important;">
+                    <span class="gradient-text">Meet
+                        Our Team</span>
+                </h1>
+                <p class="section-subtitle">Leadership committed to excellence in real estate</p>
+
+                <!-- Team Grid -->
+                <div class="team-grid">
+                    <!-- Team Member 1 -->
+                    <div class="team-member fade-in">
+                        <img src="/static/images/team/erlinda_manguiat.jpg" alt="Erlinda Manguiat" class="team-img">
+                        <h3 class="team-name">Erlinda Manguiat</h3>
+                        <p class="team-role">CEO & President</p>
+                        <p style="color: #666; margin-top: 1rem;">
+                            Leading with vision and integrity, guiding the company towards excellence in real estate
+                            services.
+                        </p>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="team-member fade-in">
+                        <img src="/static/images/team/dianna_rose_manguiat.jpg" alt="Dianna Rose Manguiat"
+                            class="team-img">
+                        <h3 class="team-name">Dianna Rose Manguiat</h3>
+                        <p class="team-role">Corporate Treasurer</p>
+                        <p style="color: #666; margin-top: 1rem;">
+                            Managing financial operations with precision and strategic oversight for sustainable growth.
+                        </p>
+                    </div>
+
+                    <!-- Team Member 3 -->
+                    <div class="team-member fade-in">
+                        <img src="/static/images/team/david_roy_manguiat.jpg" alt="David Roy Manguiat" class="team-img">
+                        <h3 class="team-name">David Roy Manguiat</h3>
+                        <p class="team-role">Corporate Secretary</p>
+                        <p style="color: #666; margin-top: 1rem;">
+                            Ensuring compliance and governance excellence in all corporate matters and documentation.
+                        </p>
+                    </div>
+
+                    <!-- Team Member 4 -->
+                    <div class="team-member fade-in">
+                        <img src="/static/images/team/darlynne_manguiat.jpg" alt="Darlynne Manguiat" class="team-img">
+                        <h3 class="team-name">Darlynne Manguiat</h3>
+                        <p class="team-role">Board of Director</p>
+                        <p style="color: #666; margin-top: 1rem;">
+                            Contributing strategic insights and guidance to drive the company's mission forward.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Values Section -->
+                <div class="row mt-5">
+                    <div class="col-lg-12 mx-auto">
+                        <div class="card-white-elevated p-5 text-center">
+                            <h2 class="section-title" style="color: transparent !important;">
+                                <span class="gradient-text">Our
+                                    Team Values</span>
+                            </h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="service-icon" style="font-size: 2.5rem;">
+                                        <i class="fas fa-handshake gradient-icon"></i>
+                                    </div>
+                                    <h4 style="color: #333; margin-top: 1rem;">Integrity</h4>
+                                    <p class="text-gray">Honest and transparent in all our dealings</p>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="service-icon" style="font-size: 2.5rem;">
+                                        <i class="fas fa-star gradient-icon"></i>
+                                    </div>
+                                    <h4 style="color: #333; margin-top: 1rem;">Excellence</h4>
+                                    <p class="text-gray">Committed to the highest standards of service</p>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="service-icon" style="font-size: 2.5rem;">
+                                        <i class="fas fa-users gradient-icon"></i>
+                                    </div>
+                                    <h4 style="color: #333; margin-top: 1rem;">Client Focus</h4>
+                                    <p class="text-gray">Your needs and satisfaction are our priority</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="row mt-5">
+                    <div class="col-lg-12 mx-auto">
+                        <div class="p-5 text-center"
+                            style="background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); border-radius: 12px; color: white;">
+                            <h2 class="mb-3">Work With Our Expert Team</h2>
+                            <p style="font-size: 1.1rem;" class="mb-4">
+                                Experience personalized service from professionals dedicated to your success
+                            </p>
+                            <a href="/contact" class="contact-link"
+                                style="background-color: white; color: transparent;">
+                                <i class="fas fa-phone"
+                                    style="background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+                                <span class="gradient-text">Contact
+                                    Our Team</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p><strong>Erlinda Manguiat</strong> - CEO & President</p>
-    </div>
-
-    <!-- Team Member 2 -->
-    <div class="team-member">
-        <div class="image-container">
-            <img src="/P/static/images/team/dianna_rose_manguiat.jpg" alt="Dianna Rose Manguiat" class="team-img">
-        </div>
-        <p><strong>Dianna Rose Manguiat</strong> - Corporate Treasurer</p>
-    </div>
-
-    <!-- Team Member 3 -->
-    <div class="team-member">
-        <div class="image-container">
-            <img src="/P/static/images/team/david_roy_manguiat.jpg" alt="David Roy Manguiat" class="team-img">
-        </div>
-        <p><strong>David Roy Manguiat</strong> - Corporate Secretary</p>
-    </div>
-
-    <!-- Team Member 4 -->
-    <div class="team-member">
-        <div class="image-container">
-            <img src="/P/static/images/team/darlynne_manguiat.jpg" alt="Darlyn Manguiat" class="team-img">
-        </div>
-        <p><strong>Darlynne Manguiat</strong> - Board of Director</p>
-    </div>
-</section>
-
     </main>
-    <footer class="text-center">
-        <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.
-            
-        </p>
-        <a id="whatsappLink" target="_blank" class="whatsapp-link" href="https://wa.me/639276154651?text=Hello%2C%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20listings%20Could%20you%20please%20provide%20more%20details%3F">
-            <i class="fab fa-whatsapp whatsapp-icon"></i>
-        </a>
-        <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information." target="_self" class="email-link">
-            <i class="fas fa-envelope"></i> 
-        </a>
-        
-    </footer>
 
-    <!-- Include Bootstrap JS and dependencies -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    <script src="/P/static/js/modal.js"></script>
-    
+    <script src="/static/js/enhanced-modal.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/footer.js"></script>
+
+    <script>
+        // Simulate content loading
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                // Hide skeleton
+                document.getElementById('skeleton-content').style.display = 'none';
+                // Show actual content
+                document.getElementById('team-content').style.display = 'block';
+
+                console.log('✅ Team content loaded');
+            }, 800); // 800ms delay to simulate loading
+        });
+    </script>
 </body>
+
 </html>

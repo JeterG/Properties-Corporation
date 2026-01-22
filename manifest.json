@@ -1,0 +1,16 @@
+{
+    "name": "Calamba Expressive Properties",
+    "short_name": "CEPC",
+    "description": "Real estate in Calamba, Laguna",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#c8102e",
+    "theme_color": "#c8102e",
+    "icons": [
+        {
+            "src": "/static/images/icon.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "propertyName": "Bilog-Bilog Tanauan Batangas City",
+    "vicinity": "BATANGAS",
+    "address": "BILOG-BILOG TANAUAN BATANGAS CITY",
+    "features": [
+        {
+            "icon": "fas fa-vector-square",
+            "text": "Lot Area: 6,151 sq m"
+        },
+        {
+            "icon": "fas fa-tractor",
+            "text": "Farm Lot"
+        }
+    ],
+    "description": "• Agricultural Land\n• Clean Title\n• Tanauan Location",
+    "location": "Tanauan, Batangas City",
+    "price": "Contact for pricing",
+    "status": "CLEAN TITLE",
+    "statusOptions": [
+        "available",
+        "reserved",
+        "sold"
+    ]
+}

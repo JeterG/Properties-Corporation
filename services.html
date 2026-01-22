@@ -1,132 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c8102e">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Calamba Expressive Properties</title>
-    <!-- Include Bootstrap CSS -->
+    <meta name="description"
+        content="Comprehensive real estate services in Calamba, Laguna - property sales, rentals, development, and documentation assistance. Expert guidance for all your property needs.">
+    <meta name="keywords"
+        content="real estate services Calamba, property sales Laguna, property rental Calamba, real estate development, property documentation">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.calambaexpressive.com/services">
+    <meta property="og:title" content="Real Estate Services - Calamba Expressive Properties">
+    <meta property="og:description"
+        content="Professional real estate services including property sales, rentals, development, and complete documentation assistance.">
+    <meta property="og:image" content="https://www.calambaexpressive.com/static/images/icon.jpg">
+
+    <title>Our Services - Real Estate Sales, Rentals & Development | Calamba Expressive Properties</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/P/static/css/styles.css">
-    <link rel="stylesheet" href="/P/static/css/modal.css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/modern-styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/icon.jpg" type="image/x-icon">
+
     <style>
-        /* Main layout styling to make footer stick to the bottom */
-        html, body {
-            height: 100%;
-            margin: 0;
+        /* Skeleton Loading Styles */
+        .skeleton {
+            background: #e0e0e0;
+            background-image: linear-gradient(90deg,
+                    #e0e0e0 0px,
+                    #f0f0f0 40px,
+                    #e0e0e0 80px);
+            background-size: 400px 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .skeleton-title {
+            height: 50px;
+            width: 300px;
+            margin: 0 auto 20px;
+            border-radius: 8px;
+        }
+
+        .skeleton-subtitle {
+            height: 24px;
+            width: 400px;
+            margin: 0 auto 40px;
+            border-radius: 6px;
+        }
+
+        .skeleton-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            min-height: 280px;
+        }
+
+        .skeleton-service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .skeleton-service-title {
+            height: 28px;
+            width: 60%;
+            margin: 0 auto 1rem;
+            border-radius: 6px;
+        }
+
+        .skeleton-service-text {
+            height: 16px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .skeleton-service-text.short {
+            width: 80%;
+        }
+
+        .skeleton-service-buttons {
             display: flex;
-            flex-direction: column;
+            gap: 10px;
+            margin-top: 1rem;
         }
 
-        main {
-            flex: 1; /* This will make the main content area expand to fill available space */
+        .skeleton-service-button {
+            flex: 1;
+            height: 40px;
+            border-radius: 6px;
         }
 
-        .navbar-custom {
-            background-color: #c8102e !important; /* Navbar background color */
+        .skeleton-why-choose {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
         }
 
-        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
-            color: #f3ef11 !important; /* Navbar text color */
+        .skeleton-section-title {
+            height: 40px;
+            width: 250px;
+            margin: 0 auto 3rem;
+            border-radius: 8px;
         }
 
-        /* Footer styling */
-        footer {
-            background-color: #c8102e; /* Footer background color */
-            color: #f3ef11; /* Footer text color */
-            padding: 20px 0;
+        .skeleton-feature-item {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .skeleton-feature-content {
+            flex: 1;
+        }
+
+        .skeleton-feature-title {
+            height: 28px;
+            width: 200px;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .skeleton-feature-desc {
+            height: 18px;
             width: 100%;
-            position: relative;
-            bottom: 0;
+            border-radius: 4px;
+        }
+
+        .skeleton-cta {
+            height: 250px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+        }
+
+        .content-hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .skeleton-subtitle {
+                width: 90%;
+            }
+
+            .skeleton-services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .skeleton-hero-card {
+            height: 250px;
+            border-radius: 12px;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .skeleton-section-title {
+            height: 40px;
+            width: 300px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-section-subtitle {
+            height: 20px;
+            width: 400px;
+            margin: 0 auto;
         }
     </style>
-
-    <link rel="icon" href="/P/static/images/icon.jpg" type="image/x-icon">
-
-    
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/P/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/projects.html">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/team.html">Our Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/achievements.html">Achievements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/partners.html">Partners</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/contact.html">Contact Us</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Excellence in Real Estate
-                </span>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
+
     <main>
-        
-<section class="center-text">
-    <h2>Our Services</h2>
-    <ul>
-        <li>Developer</li>
-        <li>Contractor</li>
-        <li>Rentals</li>
-        <li>Commercial Lease</li>
-        <li>House and Lot Selling</li>
-        <li>Condominium Selling</li>
-        <li>Raw Land</li>
-        <li>Transfer of Title</li>
-        <li>Bank Loan Assistance</li>
-        <li>Service Package</li>
-        <li>PAG-IBIG Assistance</li>
-        <li>Insurance</li>
-        <li>Building Permit</li>
-        <li>Design and Build</li>
-    </ul>
-</section>
+        <!-- Skeleton Loading -->
+        <div id="skeleton-content">
+            <div class="container mt-5 mb-5">
+                <!-- Header Skeleton -->
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-subtitle"></div>
 
+                <!-- Services Grid Skeleton -->
+                <div class="skeleton-services-grid">
+                    <!-- Service Card 1 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 5 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 6 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 7 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 8 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 9 -->
+                    <div class="skeleton-service-card">
+                        <div class="skeleton skeleton-service-icon"></div>
+                        <div class="skeleton skeleton-service-title"></div>
+                        <div class="skeleton skeleton-service-text"></div>
+                        <div class="skeleton skeleton-service-text short"></div>
+                        <div class="skeleton-service-buttons">
+                            <div class="skeleton skeleton-service-button"></div>
+                            <div class="skeleton skeleton-service-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Choose Us Skeleton -->
+                <div class="skeleton-why-choose">
+                    <div class="skeleton skeleton-section-title"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Skeleton -->
+                <section class="container mt-5">
+                    <div class="row">
+                        <div class="col-12 mx-auto">
+                            <div class="skeleton-hero-card">
+                                <div class="skeleton skeleton-section-title"></div>
+                                <div class="skeleton skeleton-section-subtitle"></div>
+                                <div class="skeleton-buttons"
+                                    style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                                    <div class="skeleton skeleton-button"></div>
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Actual Content -->
+        <div id="actual-content" class="content-hidden">
+            <div class="container mt-5 mb-5">
+                <h1 class="section-title" style="color: transparent !important;">
+                    <span class="gradient-text">Our Services</span>
+                </h1>
+                <p class="section-subtitle">Comprehensive real estate solutions tailored to your needs</p>
+
+                <!-- Services Grid -->
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-building gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Developer</h4>
+                        <p>Full-service property development from concept to completion with quality craftsmanship.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Developer services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Developer Services&body=Hello, I'm interested in learning more about your Developer services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-hard-hat gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Contractor</h4>
+                        <p>Professional construction and contracting services with experienced teams and proven results.
+                        </p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Contractor services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Contractor Services&body=Hello, I'm interested in learning more about your Contractor services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-key gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Rentals</h4>
+                        <p>Quality residential and commercial properties available for rent at competitive market rates.
+                        </p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Rentals services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Rentals Services&body=Hello, I'm interested in learning more about your Rentals services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-store gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Commercial Lease</h4>
+                        <p>Strategic commercial spaces perfect for your business needs in prime locations.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Commercial Lease services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Commercial Lease Services&body=Hello, I'm interested in learning more about your Commercial Lease services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-home gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">House and Lot Selling</h4>
+                        <p>Extensive portfolio of houses and lots to help you find your perfect family home.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your House and Lot Selling services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about House and Lot Selling Services&body=Hello, I'm interested in learning more about your House and Lot Selling services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-city gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Condominium Selling</h4>
+                        <p>Modern condominium units in desirable locations with excellent amenities.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Condominium Selling services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Condominium Selling Services&body=Hello, I'm interested in learning more about your Condominium Selling services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-mountain gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Raw Land</h4>
+                        <p>Prime undeveloped land perfect for investment or your custom development project.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Raw Land services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Raw Land Services&body=Hello, I'm interested in learning more about your Raw Land services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-file-alt gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Transfer of Title</h4>
+                        <p>Complete assistance with property title transfers and all legal documentation requirements.
+                        </p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Transfer of Title services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Transfer of Title Services&body=Hello, I'm interested in learning more about your Transfer of Title services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-university gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Bank Loan Assistance</h4>
+                        <p>Expert guidance through the bank loan application process for smoother financing.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Bank Loan Assistance services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Bank Loan Assistance Services&body=Hello, I'm interested in learning more about your Bank Loan Assistance services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-box gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Service Package</h4>
+                        <p>Comprehensive bundled services designed to meet all your real estate needs.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Service Package. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Service Package&body=Hello, I'm interested in learning more about your Service Package."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-home gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">PAG-IBIG Assistance</h4>
+                        <p>Professional support for PAG-IBIG housing loan applications and processing.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your PAG-IBIG Assistance services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about PAG-IBIG Assistance&body=Hello, I'm interested in learning more about your PAG-IBIG Assistance services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Insurance</h4>
+                        <p>Property insurance services to protect your investment and provide peace of mind.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Insurance services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Insurance Services&body=Hello, I'm interested in learning more about your Insurance services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-file-contract gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Building Permit</h4>
+                        <p>Full assistance with building permits and regulatory compliance for your projects.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Building Permit services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Building Permit Services&body=Hello, I'm interested in learning more about your Building Permit services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="fas fa-drafting-compass gradient-icon"></i>
+                        </div>
+                        <h4 class="service-title">Design and Build</h4>
+                        <p>Integrated design and construction services bringing your vision to life from start to
+                            finish.</p>
+                        <div class="btn-container">
+                            <a href="https://wa.me/639276154651?text=Hello, I'm interested in your Design and Build services. Could you provide more information?"
+                                target="_blank" class="btn-action btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="mailto:cepc.development@gmail.com?subject=Inquiry about Design and Build Services&body=Hello, I'm interested in learning more about your Design and Build services."
+                                class="btn-action btn-gradient">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Choose Us Section -->
+                <div class="row mt-5">
+                    <div class="col-12 mx-auto">
+                        <div class="card-white-elevated">
+                            <h2 class="section-title" style="color: transparent !important;">
+                                <span class="gradient-text">Why Choose Us</span>
+                            </h2>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 2rem; margin-right: 1rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #333;">Proven Track Record</h4>
+                                            <p class="text-gray">Years of successful projects and satisfied clients
+                                                throughout Calamba and surrounding areas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 2rem; margin-right: 1rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #333;">Professional Team</h4>
+                                            <p class="text-gray">Experienced professionals dedicated to providing
+                                                exceptional service at every step.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 2rem; margin-right: 1rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #333;">Client-Centered Approach</h4>
+                                            <p class="text-gray">Your satisfaction is our priority, with personalized
+                                                service tailored to your unique needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 2rem; margin-right: 1rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h4 style="color: #333;">Complete Solutions</h4>
+                                            <p class="text-gray">From development to documentation, we handle all
+                                                aspects
+                                                of your real estate transaction.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="row mt-5">
+                    <div class="col-12 mx-auto">
+                        <div class="p-5 text-center"
+                            style="background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); border-radius: 12px; color: white;">
+                            <h2 class="mb-3">Ready to Get Started?</h2>
+                            <p style="font-size: 1.1rem;" class="mb-4">
+                                Contact us today to discuss how our services can help you achieve your real estate goals
+                            </p>
+                            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                                <a href="/contact" class="contact-link"
+                                    style="background-color: white; color: #c8102e;">
+                                    <i class="fas fa-phone"
+                                        style="background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+                                    <span class="gradient-text">Contact Us</span>
+                                </a>
+                                <a href="/projects" class="contact-link"
+                                    style="background-color: white; color: #c8102e;">
+                                    <i class="fas fa-eye gradient-icon"></i>
+                                    <span class="gradient-text">Projects</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer class="text-center">
-        <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.
-            
-        </p>
-        <a id="whatsappLink" target="_blank" class="whatsapp-link" href="https://wa.me/639276154651?text=Hello%2C%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20listings%20Could%20you%20please%20provide%20more%20details%3F">
-            <i class="fab fa-whatsapp whatsapp-icon"></i>
-        </a>
-        <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information." target="_self" class="email-link">
-            <i class="fas fa-envelope"></i> 
-        </a>
-        
-    </footer>
 
-    <!-- Include Bootstrap JS and dependencies -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    <script src="/P/static/js/modal.js"></script>
-    
+    <script src="/static/js/enhanced-modal.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/footer.js"></script>
+
+    <script>
+        // Show actual content after a delay
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                document.getElementById('skeleton-content').style.display = 'none';
+                document.getElementById('actual-content').classList.remove('content-hidden');
+            }, 1000); // 1 second delay
+        });
+    </script>
 </body>
+
 </html>

@@ -1,129 +1,641 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Calamba Expressive Properties</title>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/P/static/css/styles.css">
-    <link rel="stylesheet" href="/P/static/css/modal.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<head>
     <style>
-        /* Main layout styling to make footer stick to the bottom */
-        html, body {
-            height: 100%;
-            margin: 0;
+        /* Skeleton Loading Styles */
+
+
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .skeleton-ceo-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-ceo-image {
+            height: 400px;
+            border-radius: 8px;
+        }
+
+        .skeleton-ceo-title {
+            height: 32px;
+            width: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .skeleton-ceo-name {
+            height: 28px;
+            width: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .skeleton-text-line {
+            height: 20px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-text-line.short {
+            width: 90%;
+        }
+
+        .skeleton-vision-mission {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-vm-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .skeleton-vm-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .skeleton-vm-title {
+            height: 28px;
+            width: 150px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-section-title {
+            height: 40px;
+            width: 300px;
+            margin: 0 auto 3rem;
+        }
+
+        .skeleton-values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .skeleton-value-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .skeleton-value-title {
+            height: 24px;
+            width: 120px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-value-text {
+            height: 16px;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-why-choose {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .skeleton-feature-item {
             display: flex;
-            flex-direction: column;
+            margin-bottom: 1.5rem;
         }
 
-        main {
-            flex: 1; /* This will make the main content area expand to fill available space */
+        .skeleton-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
         }
 
-        .navbar-custom {
-            background-color: #c8102e !important; /* Navbar background color */
+        .skeleton-feature-content {
+            flex: 1;
         }
 
-        .navbar-custom .nav-link, .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
-            color: #f3ef11 !important; /* Navbar text color */
+        .skeleton-feature-title {
+            height: 24px;
+            width: 180px;
+            margin-bottom: 0.5rem;
         }
 
-        /* Footer styling */
-        footer {
-            background-color: #c8102e; /* Footer background color */
-            color: #f3ef11; /* Footer text color */
-            padding: 20px 0;
+        .skeleton-feature-desc {
+            height: 18px;
             width: 100%;
-            position: relative;
-            bottom: 0;
+        }
+
+        .skeleton-cta {
+            height: 280px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+        }
+
+
+
+        @media (max-width: 992px) {
+            .skeleton-vision-mission {
+                grid-template-columns: 1fr;
+            }
+
+            .skeleton-values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skeleton-subtitle {
+                width: 90%;
+            }
+        }
+
+        .skeleton-hero-card {
+            height: 350px;
+            border-radius: 12px;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .skeleton-section-title {
+            height: 40px;
+            width: 300px;
+            margin: 0 auto 1rem;
+        }
+
+        .skeleton-section-subtitle {
+            height: 20px;
+            width: 400px;
+            margin: 0 auto;
         }
     </style>
 
-    <link rel="icon" href="/P/static/images/icon.jpg" type="image/x-icon">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#c8102e">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Learn about Calamba Expressive Properties Corporation - a trusted real estate company in Calamba, Laguna with years of experience in property development, sales, and rentals.">
+    <meta name="keywords"
+        content="about Calamba Expressive Properties, real estate company Laguna, property developer Calamba, real estate expertise Philippines">
 
-    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.calambaexpressive.com/about">
+    <meta property="og:title" content="About Us - Calamba Expressive Properties">
+    <meta property="og:description"
+        content="Learn about our mission, values, and commitment to excellence in real estate.">
+    <meta property="og:image" content="https://www.calambaexpressive.com/static/images/icon.jpg">
 
+    <title>About Us - Calamba Expressive Properties | Real Estate Company in Laguna</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/modern-styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/icon.jpg" type="image/x-icon">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-            <a class="navbar-brand" href="#">Calamba Expressive Properties</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/P/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/projects.html">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/team.html">Our Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/achievements.html">Achievements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/partners.html">Partners</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/P/contact.html">Contact Us</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    Excellence in Real Estate
-                </span>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
+
     <main>
-        
-<section class="center-text">
-    <h2>About Us</h2>
-    <p><strong>Our Vision:</strong> To be the most trusted facilitator in the real estate industry by providing honest
-        services and serving with integrity.</p>
-    <p><strong>Our Mission:</strong> Broadening sales with professional real estate personnel, and to process inventory
-        of properties with sincere dealings with the notion of clients above all.</p>
-    <h3>CEO/President</h3>
-    <p>Erlinda "Lyn" Manguiat, CEO & President of Calamba Expressive Properties Corporation, has a long history of
-        success in the real estate market.</p>
+        <!-- Skeleton Loading -->
+        <div id="skeleton-content">
+            <div class="container mt-5 mb-5">
+                <!-- Header Skeleton -->
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-subtitle"></div>
 
-    <!-- Center the image -->
-    <div class="image-container">
-        <img src="/P/static/images/image_2.jpg" alt="CEO image" class="center-img">
-    </div>
-</section>
+                <!-- CEO Section Skeleton -->
+                <div class="skeleton-ceo-card">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 mb-4 mb-lg-0">
+                            <div class="skeleton skeleton-ceo-image"></div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="skeleton skeleton-ceo-title"></div>
+                            <div class="skeleton skeleton-ceo-name"></div>
+                            <div class="skeleton skeleton-text-line"></div>
+                            <div class="skeleton skeleton-text-line"></div>
+                            <div class="skeleton skeleton-text-line"></div>
+                            <div class="skeleton skeleton-text-line short"></div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Vision & Mission Skeleton -->
+                <div class="skeleton-vision-mission">
+                    <div class="skeleton-vm-card">
+                        <div class="skeleton skeleton-vm-icon"></div>
+                        <div class="skeleton skeleton-vm-title"></div>
+                        <div class="skeleton skeleton-text-line"></div>
+                        <div class="skeleton skeleton-text-line short"></div>
+                    </div>
+                    <div class="skeleton-vm-card">
+                        <div class="skeleton skeleton-vm-icon"></div>
+                        <div class="skeleton skeleton-vm-title"></div>
+                        <div class="skeleton skeleton-text-line"></div>
+                        <div class="skeleton skeleton-text-line short"></div>
+                    </div>
+                </div>
+
+                <!-- Core Values Skeleton -->
+                <div class="skeleton skeleton-section-title"></div>
+                <div class="skeleton-values-grid">
+                    <div class="skeleton-value-card">
+                        <div class="skeleton skeleton-value-icon"></div>
+                        <div class="skeleton skeleton-value-title"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                    </div>
+                    <div class="skeleton-value-card">
+                        <div class="skeleton skeleton-value-icon"></div>
+                        <div class="skeleton skeleton-value-title"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                    </div>
+                    <div class="skeleton-value-card">
+                        <div class="skeleton skeleton-value-icon"></div>
+                        <div class="skeleton skeleton-value-title"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                    </div>
+                    <div class="skeleton-value-card">
+                        <div class="skeleton skeleton-value-icon"></div>
+                        <div class="skeleton skeleton-value-title"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                    </div>
+                    <div class="skeleton-value-card">
+                        <div class="skeleton skeleton-value-icon"></div>
+                        <div class="skeleton skeleton-value-title"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                    </div>
+                    <div class="skeleton-value-card">
+                        <div class="skeleton skeleton-value-icon"></div>
+                        <div class="skeleton skeleton-value-title"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                        <div class="skeleton skeleton-value-text"></div>
+                    </div>
+                </div>
+
+                <!-- Why Choose Us Skeleton -->
+                <div class="skeleton-why-choose">
+                    <div class="skeleton skeleton-section-title" style="margin-bottom: 2rem;"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                            <div class="skeleton-feature-item">
+                                <div class="skeleton skeleton-feature-icon"></div>
+                                <div class="skeleton-feature-content">
+                                    <div class="skeleton skeleton-feature-title"></div>
+                                    <div class="skeleton skeleton-feature-desc"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Skeleton -->
+                <section class="container mt-5">
+                    <div class="row">
+                        <div class="col-12 mx-auto">
+                            <div class="skeleton-hero-card">
+                                <div class="skeleton skeleton-section-title"></div>
+                                <div class="skeleton skeleton-section-subtitle"></div>
+                                <div class="skeleton-buttons"
+                                    style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                                    <div class="skeleton skeleton-button"></div>
+                                    <div class="skeleton skeleton-button"></div>
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Actual Content -->
+        <div id="actual-content" class="content-hidden">
+            <div class="container mt-5 mb-5">
+                <h1 class="section-title" style="color: transparent !important;">
+                    <span class="gradient-text">About
+                        Us</span>
+                </h1>
+                <p class="section-subtitle">Excellence in Real Estate Since Our Founding</p>
+
+                <!-- CEO Section -->
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <div class="property-card fade-in">
+                            <div class="row align-items-center" style="padding: 2rem;">
+                                <div class="col-lg-5 mb-4 mb-lg-0">
+                                    <img src="/static/images/image_2.jpg" alt="Erlinda 'Lyn' Manguiat - CEO"
+                                        style="width: 100%; height: 400px; object-fit: contain; border-radius: 8px; cursor: pointer;"
+                                        onclick="lightbox.open(this.src, 'Erlinda Lyn Manguiat - CEO & President')">
+                                </div>
+                                <div class="col-lg-7">
+                                    <h2 style="color: #c8102e; margin-bottom: 1rem;">
+                                        <i class="fas fa-user-tie gradient-icon"></i>
+                                        <span
+                                            style="background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">CEO
+                                            & President </span>
+                                    </h2>
+                                    <h3 style="color: #333; margin-bottom: 1.5rem;">Erlinda "Lyn" Manguiat</h3>
+                                    <p style="font-size: 1.05rem; line-height: 1.8; color: #666;">
+                                        Erlinda "Lyn" Manguiat, CEO & President of Calamba Expressive Properties
+                                        Corporation,
+                                        has a long history of success in the real estate market. With years of
+                                        experience
+                                        and
+                                        a deep understanding of the industry, she leads the company with vision,
+                                        integrity,
+                                        and an unwavering commitment to client satisfaction.
+                                    </p>
+                                    <p style="font-size: 1.05rem; line-height: 1.8; color: #666; margin-bottom: 0;">
+                                        Under her leadership, Calamba Expressive Properties has grown to become a
+                                        trusted
+                                        name in real estate development, sales, and property management, serving the
+                                        needs
+                                        of countless families and businesses throughout the region.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision & Mission -->
+                <div class="row mb-5">
+                    <div class="col-lg-6 mb-4">
+                        <div class="service-card fade-in" style="height: 100%;">
+                            <div class="service-icon">
+                                <i class="fas fa-eye gradient-icon"></i>
+                            </div>
+                            <h3 class="service-title">Our Vision</h3>
+                            <p style="font-size: 1.05rem; line-height: 1.8;">
+                                To be the most trusted facilitator in the real estate industry by providing honest
+                                services and serving with integrity.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="service-card fade-in" style="height: 100%;">
+                            <div class="service-icon">
+                                <i class="fas fa-bullseye gradient-icon"></i>
+                            </div>
+                            <h3 class="service-title">Our Mission</h3>
+                            <p style="font-size: 1.05rem; line-height: 1.8;">
+                                Broadening sales with professional real estate personnel, and to process inventory
+                                of properties with sincere dealings with the notion of clients above all.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company Values -->
+                <div class="row mt-5 mb-5">
+                    <div class="col-lg-12 mx-auto">
+                        <h2 class="section-title" style="color: transparent !important;">
+                            <span class="gradient-text">Our
+                                Core Values</span>
+                        </h2>
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card text-center fade-in">
+                                    <div class="service-icon">
+                                        <i class="fas fa-handshake gradient-icon"></i>
+                                    </div>
+                                    <h4 class="service-title">Integrity</h4>
+                                    <p>Honest, transparent, and ethical in all our business dealings and client
+                                        relationships.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card text-center fade-in">
+                                    <div class="service-icon">
+                                        <i class="fas fa-award gradient-icon"></i>
+                                    </div>
+                                    <h4 class="service-title">Excellence</h4>
+                                    <p>Committed to delivering the highest quality of service and exceeding
+                                        expectations.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card text-center fade-in">
+                                    <div class="service-icon">
+                                        <i class="fas fa-heart gradient-icon"></i>
+                                    </div>
+                                    <h4 class="service-title">Client First</h4>
+                                    <p>Your needs, satisfaction, and success are at the center of everything we do.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card text-center fade-in">
+                                    <div class="service-icon">
+                                        <i class="fas fa-users gradient-icon"></i>
+                                    </div>
+                                    <h4 class="service-title">Professionalism</h4>
+                                    <p>Experienced team members who bring expertise and dedication to every project.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card text-center fade-in">
+                                    <div class="service-icon">
+                                        <i class="fas fa-lightbulb gradient-icon"></i>
+                                    </div>
+                                    <h4 class="service-title">Innovation</h4>
+                                    <p>Embracing modern solutions and creative approaches to real estate challenges.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card text-center fade-in">
+                                    <div class="service-icon">
+                                        <i class="fas fa-leaf gradient-icon"></i>
+                                    </div>
+                                    <h4 class="service-title">Sustainability</h4>
+                                    <p>Building for the future with responsible and sustainable development practices.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Choose Us -->
+                <div class="row mb-5">
+                    <div class="col-lg-12 mx-auto call-to-action">
+                        <div class="card-white-elevated">
+                            <h2 class="section-title" style="color: transparent !important;">
+                                <span class="gradient-text">Why
+                                    Choose Calamba Expressive Properties</span>
+                            </h2>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 1.5rem; margin-right: 1rem; margin-top: 0.25rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h5 style="color: #333;">Proven Track Record</h5>
+                                            <p class="text-gray">Years of successful projects and satisfied clients
+                                                throughout the region.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 1.5rem; margin-right: 1rem; margin-top: 0.25rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h5 style="color: #333;">Comprehensive Services</h5>
+                                            <p class="text-gray">Full spectrum of real estate solutions under one
+                                                roof.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 1.5rem; margin-right: 1rem; margin-top: 0.25rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h5 style="color: #333;">Local Expertise</h5>
+                                            <p class="text-gray">Deep knowledge of the Calamba market and surrounding
+                                                areas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <div style="font-size: 1.5rem; margin-right: 1rem; margin-top: 0.25rem;">
+                                            <i class="fas fa-check-circle gradient-icon"></i>
+                                        </div>
+                                        <div>
+                                            <h5 style="color: #333;">Personalized Service</h5>
+                                            <p class="text-gray">Tailored solutions that address your specific needs
+                                                and
+                                                goals.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="row">
+                    <div class="col-lg-12 mx-auto call-to-action">
+                        <div class="p-5 text-center"
+                            style="background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); border-radius: 12px; color: white;">
+                            <h2 class="mb-3">Ready to Work With Us?</h2>
+                            <p style="font-size: 1.1rem;" class="mb-4">
+                                Experience the difference of working with a team that truly cares about your success
+                            </p>
+                            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                                <a href="/contact" class="contact-link"
+                                    style="background-color: white; color: #c8102e;">
+                                    <i class="fas fa-phone"
+                                        style="background: linear-gradient(135deg, #c8102e 0%, #a77846 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+                                    <span class="gradient-text">Contact
+                                        Us </span>
+                                </a>
+                                <a href="/projects" class="contact-link"
+                                    style="background-color: white; color: #c8102e;">
+                                    <i class="fas fa-eye gradient-icon"></i>
+                                    <span class="gradient-text">View
+                                        Projects </span>
+                                </a>
+                                <a href="/team" class="contact-link"
+                                    style="background-color: white; color: #c8102e;">
+                                    <i class="fas fa-users gradient-icon"></i>
+                                    <span class="gradient-text">Meet
+                                        Our Team </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer class="text-center">
-        <p>&copy; 2024 Calamba Expressive Properties Corporation. All rights reserved.
-            
-        </p>
-        <a id="whatsappLink" target="_blank" class="whatsapp-link" href="https://wa.me/639276154651?text=Hello%2C%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20your%20listings%20Could%20you%20please%20provide%20more%20details%3F">
-            <i class="fab fa-whatsapp whatsapp-icon"></i>
-        </a>
-        <a href="mailto:cepc.development@gmail.com?subject=Inquiry%20about%20Calamba%20Expressive%20Properties&body=Hello,%20I%20am%20interested%20in%20learning%20more%20about%20your%20services.%20Please%20provide%20me%20with%20additional%20information." target="_self" class="email-link">
-            <i class="fas fa-envelope"></i> 
-        </a>
-        
-    </footer>
 
-    <!-- Include Bootstrap JS and dependencies -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    <script src="/P/static/js/modal.js"></script>
-    
+    <script src="/static/js/enhanced-modal.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/footer.js"></script>
+
+    <script>
+        // Show actual content after a delay
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                document.getElementById('skeleton-content').style.display = 'none';
+                document.getElementById('actual-content').classList.remove('content-hidden');
+            }, 1000); // 1 second delay
+        });
+    </script>
 </body>
+
 </html>
